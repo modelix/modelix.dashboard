@@ -17,7 +17,7 @@ export default function ReportAreaChart() {
       grid={{ horizontal: true }}
       xAxis={[{ data: labels, scaleType: 'point', disableLine: true, disableTicks: true, tickLabelStyle: axisFonstyle }]}
       yAxis={[{ tickMaxStep: 10 }]}
-      leftAxis={null}
+      leftaxis={null}
       series={[
         {
           data,

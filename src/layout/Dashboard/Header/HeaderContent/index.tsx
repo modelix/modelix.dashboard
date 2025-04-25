@@ -11,7 +11,7 @@ import Notification from './Notification';
 import MobileSection from './MobileSection';
 
 // project import
-import { GithubOutlined } from '@ant-design/icons';
+import { GithubOutlined, DockerOutlined } from '@ant-design/icons';
 
 // ==============================|| HEADER - CONTENT ||============================== //
 
@@ -22,17 +22,40 @@ export default function HeaderContent() {
     <>
       {!downLG && <Search />}
       {downLG && <Box sx={{ width: '100%', ml: 1 }} />}
-      <IconButton
-        component={Link}
-        href="https://github.com/codedthemes/mantis-free-react-admin-template"
-        target="_blank"
-        disableRipple
-        color="secondary"
-        title="Download Free Version"
-        sx={{ color: 'text.primary', bgcolor: 'grey.100' }}
-      >
-        <GithubOutlined />
-      </IconButton>
+
+      <Box sx={{ flexShrink: 0, ml: 0.75 }}>
+        <IconButton
+            component={Link}
+            href="https://github.com/modelix"
+            target="_blank"
+            color="secondary"
+            title="Modelix on Docker GitHub"
+            sx={(theme) => ({
+              color: 'text.primary',
+              bgcolor: 'transparent',
+              ...theme.applyStyles('dark', { bgcolor: 'transparent' })
+            })}
+        >
+          <GithubOutlined />
+        </IconButton>
+      </Box>
+
+      <Box sx={{ flexShrink: 0, ml: 0.75 }}>
+        <IconButton
+            component={Link}
+            href="https://hub.docker.com/u/modelix"
+            target="_blank"
+            color="secondary"
+            title="Modelix on Docker Hub"
+            sx={(theme) => ({
+              color: 'text.primary',
+              bgcolor: 'transparent',
+              ...theme.applyStyles('dark', { bgcolor: 'transparent' })
+            })}
+        >
+          <DockerOutlined />
+        </IconButton>
+      </Box>
 
       <Notification />
       {!downLG && <Profile />}

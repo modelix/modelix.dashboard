@@ -7,6 +7,8 @@ import DashboardLayout from '../layout/Dashboard';
 // render- Dashboard
 const DashboardDefault = Loadable(lazy(() => import('../pages/dashboard/default')));
 
+const WorkspacesList = Loadable(lazy(() => import('../pages/workspaces/list')));
+
 // render - color
 const Color = Loadable(lazy(() => import('../pages/component-overview/color')));
 const Typography = Loadable(lazy(() => import('../pages/component-overview/typography')));
@@ -31,6 +33,23 @@ const MainRoutes = {
         {
           path: 'default',
           element: <DashboardDefault />
+        }
+      ]
+    },
+    {
+      path: 'workspaces',
+      children: [
+        {
+          path: 'workspaces',
+          element: <WorkspacesList />
+        },
+        {
+          path: 'git-repositories',
+          element: <WorkspacesList />
+        },
+        {
+          path: 'mps-environments',
+          element: <WorkspacesList />
         }
       ]
     },

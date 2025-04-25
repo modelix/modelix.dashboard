@@ -19,32 +19,32 @@ export default function LogoMain() {
         <g transform="translate(-53, -98)">
           <g transform="scale(0.6, 0.6) translate(100, 180)">
             <g transform="translate(-20, 0)">
-              <line fill="none" stroke="#888" x1="125" y1="150" x2="275" y2="50" stroke-width="25"/>
-              <line fill="none" stroke="#888" x1="275" y1="50" x2="225" y2="150" stroke-width="25"/>
-              <line fill="none" stroke="#888" x1="275" y1="50" x2="340" y2="250" stroke-width="25"/>
-              <line fill="none" stroke="#888" x1="460" y1="250" x2="275" y2="50" stroke-width="25"/>
-              <ellipse fill="#888" stroke="#888" stroke-width="8" cx="275" cy="50" rx="25" ry="25"/>
-              <ellipse fill="#00457c" stroke="#00457c" stroke-width="8" cx="75" cy="350" rx="25" ry="25"/>
-              <ellipse fill="#00457c" stroke="#00457c" stroke-width="8" cx="175" cy="350" rx="25" ry="25"/>
-              <ellipse fill="#00457c" stroke="#00457c" stroke-width="8" cx="275" cy="350" rx="25" ry="25"/>
-              <ellipse fill="#00457c" stroke="#00457c" stroke-width="8" cx="125" cy="150" rx="25" ry="25"/>
-              <ellipse fill="#00457c" stroke="#00457c" stroke-width="8" cx="225" cy="150" rx="25" ry="25"/>
-              <line fill="none" stroke="#00457c" x1="75" y1="350" x2="125" y2="150" stroke-width="25"/>
-              <line fill="none" stroke="#00457c" stroke-width="25" x1="125" y1="150" x2="175" y2="350"/>
-              <line fill="none" stroke="#00457c" stroke-width="25" x1="225" y1="150" x2="175" y2="350"/>
-              <line fill="none" stroke="#00457c" stroke-width="25" x1="275" y1="350" x2="225" y2="150"/>
-              <ellipse fill="#000" stroke="#000" stroke-width="8" cx="340" cy="250" rx="25" ry="25"/>
-              <ellipse fill="#000" stroke="#000" stroke-width="8" cx="340" cy="450" rx="25" ry="25"/>
-              <ellipse fill="#000" stroke="#000" stroke-width="8" cx="400" cy="350" rx="25" ry="25"/>
-              <ellipse fill="#000" stroke="#000" stroke-width="8" cx="460" cy="250" rx="25" ry="25"/>
-              <ellipse fill="#000" stroke="#000" stroke-width="8" cx="460" cy="450" rx="25" ry="25"/>
-              <line fill="none" stroke="#000" x1="340" y1="250" x2="400" y2="350" stroke-width="25"/>
-              <line fill="none" stroke="#000" x1="460" y1="250" x2="400" y2="350" stroke-width="25"/>
-              <line fill="none" stroke="#000" x1="340" y1="450" x2="400" y2="350" stroke-width="25"/>
-              <line fill="none" stroke="#000" x1="460" y1="450" x2="400" y2="350" stroke-width="25"/>
+              <line fill="none" stroke="#888" x1="125" y1="150" x2="275" y2="50" strokeWidth="25"/>
+              <line fill="none" stroke="#888" x1="275" y1="50" x2="225" y2="150" strokeWidth="25"/>
+              <line fill="none" stroke="#888" x1="275" y1="50" x2="340" y2="250" strokeWidth="25"/>
+              <line fill="none" stroke="#888" x1="460" y1="250" x2="275" y2="50" strokeWidth="25"/>
+              <ellipse fill="#888" stroke="#888" strokeWidth="8" cx="275" cy="50" rx="25" ry="25"/>
+              <ellipse fill="#00457c" stroke="#00457c" strokeWidth="8" cx="75" cy="350" rx="25" ry="25"/>
+              <ellipse fill="#00457c" stroke="#00457c" strokeWidth="8" cx="175" cy="350" rx="25" ry="25"/>
+              <ellipse fill="#00457c" stroke="#00457c" strokeWidth="8" cx="275" cy="350" rx="25" ry="25"/>
+              <ellipse fill="#00457c" stroke="#00457c" strokeWidth="8" cx="125" cy="150" rx="25" ry="25"/>
+              <ellipse fill="#00457c" stroke="#00457c" strokeWidth="8" cx="225" cy="150" rx="25" ry="25"/>
+              <line fill="none" stroke="#00457c" x1="75" y1="350" x2="125" y2="150" strokeWidth="25"/>
+              <line fill="none" stroke="#00457c" strokeWidth="25" x1="125" y1="150" x2="175" y2="350"/>
+              <line fill="none" stroke="#00457c" strokeWidth="25" x1="225" y1="150" x2="175" y2="350"/>
+              <line fill="none" stroke="#00457c" strokeWidth="25" x1="275" y1="350" x2="225" y2="150"/>
+              <ellipse fill="#000" stroke="#000" strokeWidth="8" cx="340" cy="250" rx="25" ry="25"/>
+              <ellipse fill="#000" stroke="#000" strokeWidth="8" cx="340" cy="450" rx="25" ry="25"/>
+              <ellipse fill="#000" stroke="#000" strokeWidth="8" cx="400" cy="350" rx="25" ry="25"/>
+              <ellipse fill="#000" stroke="#000" strokeWidth="8" cx="460" cy="250" rx="25" ry="25"/>
+              <ellipse fill="#000" stroke="#000" strokeWidth="8" cx="460" cy="450" rx="25" ry="25"/>
+              <line fill="none" stroke="#000" x1="340" y1="250" x2="400" y2="350" strokeWidth="25"/>
+              <line fill="none" stroke="#000" x1="460" y1="250" x2="400" y2="350" strokeWidth="25"/>
+              <line fill="none" stroke="#000" x1="340" y1="450" x2="400" y2="350" strokeWidth="25"/>
+              <line fill="none" stroke="#000" x1="460" y1="450" x2="400" y2="350" strokeWidth="25"/>
             </g>
           </g>
-          <text font-family="Inter" font-weight="700" font-size="250" y="360" x="500" fill={theme.palette.common.black} fillOpacity="0.85">Modelix</text>
+          <text fontFamily="Inter" fontWeight="700" fontSize="250" y="360" x="500" fill={theme.palette.common.black} fillOpacity="0.85">Modelix</text>
         </g>
       </svg>
     </>

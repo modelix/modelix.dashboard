@@ -1,13 +1,4 @@
-// assets
-import { LoginOutlined, ProfileOutlined } from '@ant-design/icons';
-
-// icons
-const icons = {
-  LoginOutlined,
-  ProfileOutlined
-};
-
-// ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
+import { LoginOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons';
 
 const pages = {
   id: 'authentication',
@@ -19,7 +10,7 @@ const pages = {
       title: 'Login',
       type: 'item',
       url: '/login',
-      icon: icons.LoginOutlined,
+      icon: LoginOutlined,
       target: true
     },
     {
@@ -27,7 +18,15 @@ const pages = {
       title: 'Register',
       type: 'item',
       url: '/register',
-      icon: icons.ProfileOutlined,
+      icon: ProfileOutlined,
+      target: true
+    },
+    {
+      id: 'user-management',
+      title: 'Users',
+      type: 'item',
+      url: 'https://modelix-dev.q60.de/admin/',
+      icon: UserOutlined,
       target: true
     }
   ]

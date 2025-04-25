@@ -17,7 +17,7 @@ export default function MonthlyBarChart() {
       height={380}
       series={[{ data, label: 'Series-1' }]}
       xAxis={[{ data: xLabels, scaleType: 'band', disableLine: true, disableTicks: true, tickLabelStyle: axisFonstyle }]}
-      leftAxis={null}
+      leftaxis={null}
       slotProps={{ legend: { hidden: true }, bar: { rx: 5, ry: 5 } }}
       axisHighlight={{ x: 'none' }}
       margin={{ left: 20, right: 20 }}
