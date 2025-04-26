@@ -1,6 +1,7 @@
-import { CloudServerOutlined } from '@ant-design/icons';
+import {ClusterOutlined} from '@ant-design/icons';
+import {NavGroupData} from "../layout/Dashboard/Drawer/DrawerContent/Navigation/NavGroup.tsx";
 
-const repositories = {
+const repositories: NavGroupData = {
   id: 'group-repositories',
   title: 'Model Repositories',
   type: 'group',
@@ -10,7 +11,7 @@ const repositories = {
       title: 'Repositories',
       type: 'item',
       url: '/repositories/default',
-      icon: CloudServerOutlined,
+      icon: ClusterOutlined,
       breadcrumbs: false
     }
   ]

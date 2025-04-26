@@ -1,15 +1,44 @@
-// project import
-import dashboard from './dashboard.js';
-import pages from './page';
-import utilities from './utilities';
-import support from './support';
-import workspaces from "./workspaces.tsx";
-import repositories from "./repositories.tsx";
+import dashboard from "./dashboard";
+import pages from "./page";
+import support from "./support";
+import repositories from "./repositories";
+import { NavGroupData } from "../layout/Dashboard/Drawer/DrawerContent/Navigation/NavGroup";
+import workspaces from "./workspaces";
+import {BranchesOutlined, CloudDownloadOutlined, CloudServerOutlined, HddOutlined} from "@ant-design/icons";
+import GitIcon from "../components/icons/GitIcon.tsx";
 
-// ==============================|| MENU ITEMS ||============================== //
+const connectivity: NavGroupData = {
+  id: 'group-connectivity',
+  title: 'Connectivity',
+  type: 'group',
+  children: [
+    {
+      id: "maven",
+      title: "Maven",
+      type: "item",
+      url: "/connectivity/maven",
+      icon: CloudServerOutlined
+    },
+    {
+      id: "git",
+      title: "Git",
+      type: "item",
+      url: "/connectivity/git",
+      icon: BranchesOutlined
+    },
+    {
+      id: "uploads",
+      title: "Uploads",
+      type: "item",
+      url: "/connectivity/uploads",
+      icon: HddOutlined
+    },
+  ]
+}
 
-const menuItems = {
-  items: [workspaces, repositories, dashboard, pages, support]
+
+const menuItems: { items: NavGroupData[] } = {
+  items: [connectivity, workspaces, repositories, dashboard, pages, support],
 };
 
 export default menuItems;

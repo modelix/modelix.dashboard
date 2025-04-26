@@ -1,6 +1,7 @@
 import { LoginOutlined, ProfileOutlined, UserOutlined } from '@ant-design/icons';
+import {NavGroupData} from "../layout/Dashboard/Drawer/DrawerContent/Navigation/NavGroup.tsx";
 
-const pages = {
+const pages: NavGroupData = {
   id: 'authentication',
   title: 'Authentication',
   type: 'group',

@@ -1,11 +1,13 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from "react-router";
 
-// project imports
-import MainRoutes from './MainRoutes';
-import LoginRoutes from './LoginRoutes';
-
-// ==============================|| ROUTING RENDER ||============================== //
-
-const router = createBrowserRouter([MainRoutes, LoginRoutes], { basename: '/' });
-
-export default router;
+export default function mainRoutes() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="connectivity">
+          <Route path="maven"></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}

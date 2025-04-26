@@ -1,14 +1,7 @@
-// assets
 import { DashboardOutlined } from '@ant-design/icons';
+import {NavGroupData} from "../layout/Dashboard/Drawer/DrawerContent/Navigation/NavGroup.tsx";
 
-// icons
-const icons = {
-  DashboardOutlined
-};
-
-// ==============================|| MENU ITEMS - DASHBOARD ||============================== //
-
-const dashboard = {
+const dashboard: NavGroupData = {
   id: 'group-dashboard',
   title: 'Navigation',
   type: 'group',
@@ -18,7 +11,7 @@ const dashboard = {
       title: 'Dashboard',
       type: 'item',
       url: '/dashboard/default',
-      icon: icons.DashboardOutlined,
+      icon: DashboardOutlined,
       breadcrumbs: false
     }
   ]

@@ -9,22 +9,23 @@ import NavItem from './NavItem';
 import { useGetMenuMaster } from '../../../../../api/menu';
 import * as React from "react";
 
-interface NavItemBaseData {
+export interface NavItemBaseData {
   type: 'group' | 'item',
   id: string,
   title: string,
 }
 
-interface NavGroupData extends NavItemBaseData {
+export interface NavGroupData extends NavItemBaseData {
   type: 'group',
   children: NavItemData[],
 }
 
-interface NavItemData extends NavItemBaseData {
+export interface NavItemData extends NavItemBaseData {
   type: 'item',
   url: string,
-  target: string | undefined,
-  icon: React.ReactNode | undefined,
+  target?: boolean,
+  icon?: object,
+  breadcrumbs?: boolean,
 }
 
 

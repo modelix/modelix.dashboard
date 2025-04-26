@@ -1,5 +1,6 @@
 // assets
 import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
+import {NavGroupData} from "../layout/Dashboard/Drawer/DrawerContent/Navigation/NavGroup.tsx";
 
 // icons
 const icons = {
@@ -9,7 +10,7 @@ const icons = {
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
 
-const support = {
+const support: NavGroupData = {
   id: 'support',
   title: 'Support',
   type: 'group',
@@ -19,8 +20,7 @@ const support = {
       title: 'Documentation',
       type: 'item',
       url: 'https://docs.modelix.org/',
-      icon: icons.QuestionOutlined,
-      external: true,
+      icon: QuestionOutlined,
       target: true
     }
   ]

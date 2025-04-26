@@ -19,7 +19,12 @@ const Shadow = Loadable(lazy(() => import('../pages/component-overview/shadows')
 // render - sample page
 const SamplePage = Loadable(lazy(() => import('../pages/extra-pages/sample-page')));
 
-// ==============================|| MAIN ROUTING ||============================== //
+
+interface Route {
+  path: string,
+
+}
+
 
 const MainRoutes = {
   path: '/',
