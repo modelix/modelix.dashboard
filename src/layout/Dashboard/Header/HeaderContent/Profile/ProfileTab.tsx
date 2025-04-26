@@ -10,45 +10,40 @@ import ListItemText from '@mui/material/ListItemText';
 import EditOutlined from '@ant-design/icons/EditOutlined';
 import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
+import LoginOutlined from '@ant-design/icons/LoginOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import WalletOutlined from '@ant-design/icons/WalletOutlined';
+import {AuthContextProps, useAuth} from "react-oidc-context";
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
 export default function ProfileTab() {
+  const auth = useAuth();
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <ListItemButton>
-        <ListItemIcon>
-          <EditOutlined />
-        </ListItemIcon>
-        <ListItemText primary="Edit Profile" />
-      </ListItemButton>
-      <ListItemButton>
+      <ListItemButton onClick={() => window.open(import.meta.env.VITE_OIDC_PROFILE_URI, "_blank")}>
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
         <ListItemText primary="View Profile" />
       </ListItemButton>
-
-      <ListItemButton>
-        <ListItemIcon>
-          <ProfileOutlined />
-        </ListItemIcon>
-        <ListItemText primary="Social Profile" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <WalletOutlined />
-        </ListItemIcon>
-        <ListItemText primary="Billing" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <LogoutOutlined />
-        </ListItemIcon>
-        <ListItemText primary="Logout" />
-      </ListItemButton>
+      {
+        auth.isAuthenticated ? (
+            <ListItemButton onClick={() => auth.signoutPopup()}>
+              <ListItemIcon>
+                <LogoutOutlined />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+        ) : (
+            <ListItemButton onClick={() => auth.signinPopup()}>
+              <ListItemIcon>
+                <LoginOutlined />
+              </ListItemIcon>
+              <ListItemText primary="Login" />
+            </ListItemButton>
+        )
+      }
     </List>
   );
 }

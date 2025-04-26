@@ -27,8 +27,12 @@ import IconButton from '../../../../../components/@extended/IconButton';
 // assets
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import SettingOutlined from '@ant-design/icons/SettingOutlined';
+import LoginOutlined from '@ant-design/icons/LoginOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import avatarMPS25Fox from '../../../../../assets/images/users/mps25fox.png';
+import {useAuth} from "react-oidc-context";
+import Button from "@mui/material/Button";
+import LoginIcon from '@mui/icons-material/Login';
 
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
@@ -48,9 +52,22 @@ function a11yProps(index) {
 
 // ==============================|| HEADER CONTENT - PROFILE ||============================== //
 
-export default function Profile() {
-  const theme = useTheme();
+export default function ProfileOrLoginButton() {
+  const auth = useAuth();
+  if (auth.isAuthenticated) {
+    return <Profile />
+  } else {
+    return (
+        <Button variant="contained" startIcon={<LoginOutlined/>} onClick={() => auth.signinPopup()} sx={{ml: 3}}>
+          Login
+        </Button>
+    )
+  }
+}
 
+export function Profile() {
+  const theme = useTheme();
+  const auth = useAuth();
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const handleToggle = () => {
@@ -90,7 +107,7 @@ export default function Profile() {
         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center', p: 0.5 }}>
           <Avatar alt="profile user" src={avatarMPS25Fox} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-            Eddie Torr
+            { `${auth.user?.profile?.name}` }
           </Typography>
         </Stack>
       </ButtonBase>

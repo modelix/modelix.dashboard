@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
@@ -20,8 +20,8 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project imports
-import IconButton from 'components/@extended/IconButton';
-import AnimateButton from 'components/@extended/AnimateButton';
+import IconButton from '../../components/@extended/IconButton';
+import AnimateButton from '../../components/@extended/AnimateButton';
 
 // assets
 import EyeOutlined from '@ant-design/icons/EyeOutlined';

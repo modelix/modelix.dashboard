@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 // project imports
-import AuthFooter from 'components/cards/AuthFooter';
-import Logo from 'components/logo';
+import AuthFooter from '../../components/cards/AuthFooter';
+import Logo from '../../components/logo';
 import AuthCard from './AuthCard.js';
 
 // assets

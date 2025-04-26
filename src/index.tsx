@@ -34,13 +34,24 @@ import '@fontsource/public-sans/700.css';
 // project imports
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {AuthProvider} from "react-oidc-context";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 // ==============================|| MAIN - REACT DOM RENDER ||============================== //
 
-root.render(<App />);
+const oidcConfig = {
+  authority: import.meta.env.VITE_OIDC_AUTHORITY,
+  client_id: import.meta.env.VITE_OIDC_CLIENT_ID,
+  redirect_uri: import.meta.env.VITE_OIDC_REDIRECT_URI,
+};
+
+root.render(
+    <AuthProvider {...oidcConfig}>
+      <App />
+    </AuthProvider>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

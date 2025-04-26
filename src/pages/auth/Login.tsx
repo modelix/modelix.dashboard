@@ -11,7 +11,7 @@ import AuthLogin from '../../sections/auth/AuthLogin';
 
 // ================================|| JWT - LOGIN ||================================ //
 
-export default function Login() {
+export default function LoginPage() {
   return (
     <AuthWrapper>
       <Grid container spacing={3}>
