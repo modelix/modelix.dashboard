@@ -7,7 +7,9 @@ import DashboardLayout from '../layout/Dashboard';
 // render- Dashboard
 const DashboardDefault = Loadable(lazy(() => import('../pages/dashboard/default')));
 
-const WorkspacesList = Loadable(lazy(() => import('../pages/workspaces/list')));
+const WorkspacesList = Loadable(lazy(() => import('../pages/workspaces/workspaces.tsx')));
+const WorkspacesGitRepositories = Loadable(lazy(() => import('../pages/workspaces/git-repositories.tsx')));
+const WorkspacesMpsEnvironments = Loadable(lazy(() => import('../pages/workspaces/mps-environments.tsx')));
 
 // render - color
 const Color = Loadable(lazy(() => import('../pages/component-overview/color')));
@@ -45,11 +47,11 @@ const MainRoutes = {
         },
         {
           path: 'git-repositories',
-          element: <WorkspacesList />
+          element: <WorkspacesGitRepositories />
         },
         {
           path: 'mps-environments',
-          element: <WorkspacesList />
+          element: <WorkspacesMpsEnvironments />
         }
       ]
     },

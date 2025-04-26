@@ -44,7 +44,7 @@ export default function LogoMain() {
               <line fill="none" stroke="#000" x1="460" y1="450" x2="400" y2="350" strokeWidth="25"/>
             </g>
           </g>
-          <text fontFamily="Inter" fontWeight="700" fontSize="250" y="360" x="500" fill={theme.palette.common.black} fillOpacity="0.85">Modelix</text>
+          <text fontFamily="Inter" fontWeight="700" fontSize="250" y="360" x="500" fill="#00457c">Modelix</text>
         </g>
       </svg>
     </>

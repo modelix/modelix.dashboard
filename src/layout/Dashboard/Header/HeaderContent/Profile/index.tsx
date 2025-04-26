@@ -28,7 +28,7 @@ import IconButton from '../../../../../components/@extended/IconButton';
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import SettingOutlined from '@ant-design/icons/SettingOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
-import avatar1 from '../../../../../assets/images/users/avatar-1.png';
+import avatarMPS25Fox from '../../../../../assets/images/users/mps25fox.png';
 
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
@@ -88,9 +88,9 @@ export default function Profile() {
         onClick={handleToggle}
       >
         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center', p: 0.5 }}>
-          <Avatar alt="profile user" src={avatar1} size="sm" />
+          <Avatar alt="profile user" src={avatarMPS25Fox} size="sm" />
           <Typography variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
-            John Doe
+            Eddie Torr
           </Typography>
         </Stack>
       </ButtonBase>
@@ -121,11 +121,11 @@ export default function Profile() {
                     <Grid container justifyContent="space-between" alignItems="center">
                       <Grid>
                         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center' }}>
-                          <Avatar alt="profile user" src={avatar1} sx={{ width: 32, height: 32 }} />
+                          <Avatar alt="profile user" src={avatarMPS25Fox} sx={{ width: 32, height: 32 }} />
                           <Stack>
-                            <Typography variant="h6">John Doe</Typography>
+                            <Typography variant="h6">Jenna Wrightor</Typography>
                             <Typography variant="body2" color="text.secondary">
-                              UI/UX Designer
+                              Chief Caches Invalidator
                             </Typography>
                           </Stack>
                         </Stack>

@@ -7,6 +7,26 @@ import Box from '@mui/material/Box';
 // project import
 import NavItem from './NavItem';
 import { useGetMenuMaster } from '../../../../../api/menu';
+import * as React from "react";
+
+interface NavItemBaseData {
+  type: 'group' | 'item',
+  id: string,
+  title: string,
+}
+
+interface NavGroupData extends NavItemBaseData {
+  type: 'group',
+  children: NavItemData[],
+}
+
+interface NavItemData extends NavItemBaseData {
+  type: 'item',
+  url: string,
+  target: string | undefined,
+  icon: React.ReactNode | undefined,
+}
+
 
 export default function NavGroup({ item }) {
   const { menuMaster } = useGetMenuMaster();

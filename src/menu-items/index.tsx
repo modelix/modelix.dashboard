@@ -9,7 +9,7 @@ import repositories from "./repositories.tsx";
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-  items: [workspaces, repositories, dashboard, pages, utilities, support]
+  items: [workspaces, repositories, dashboard, pages, support]
 };
 
 export default menuItems;

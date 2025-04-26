@@ -4,7 +4,7 @@ import mpsIcon from "../assets/images/mps-logo.png"
 
 const workspaces = {
   id: 'group-workspaces',
-  title: 'MPS Workspaces',
+  title: 'MPS Projects',
   type: 'group',
   children: [
     {
