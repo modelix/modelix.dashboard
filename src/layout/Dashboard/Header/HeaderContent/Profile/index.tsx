@@ -140,16 +140,16 @@ export function Profile() {
                         <Stack direction="row" sx={{ gap: 1.25, alignItems: 'center' }}>
                           <Avatar alt="profile user" src={avatarMPS25Fox} sx={{ width: 32, height: 32 }} />
                           <Stack>
-                            <Typography variant="h6">Jenna Wrightor</Typography>
+                            <Typography variant="h6">{`${auth.user?.profile?.name}`}</Typography>
                             <Typography variant="body2" color="text.secondary">
-                              Chief Caches Invalidator
+                              {auth.user?.profile?.email}
                             </Typography>
                           </Stack>
                         </Stack>
                       </Grid>
                       <Grid>
                         <Tooltip title="Logout">
-                          <IconButton size="large" sx={{ color: 'text.primary' }}>
+                          <IconButton size="large" sx={{ color: 'text.primary' }} onClick={() => auth.signoutPopup()}>
                             <LogoutOutlined />
                           </IconButton>
                         </Tooltip>

@@ -1,7 +1,3 @@
-import { RouterProvider } from 'react-router-dom';
-
-// project imports
-
 import ScrollTop from './components/ScrollTop';
 
 import ThemeCustomization from './themes';
@@ -11,7 +7,6 @@ import DashboardLayout from "./layout/Dashboard";
 import GitConnectivityPage from "./pages/connectivity/git.tsx";
 import UploadsConnectivityPage from "./pages/connectivity/uploads.tsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import LoginPage from "./pages/auth/Login.tsx";
 import Typography from "@mui/material/Typography";
 import {useAuth} from "react-oidc-context";
 

@@ -15,13 +15,11 @@ import { handlerDrawerOpen, useGetMenuMaster } from '../../../api/menu';
 
 // ==============================|| MAIN LAYOUT - DRAWER ||============================== //
 
-export default function MainDrawer({ window }) {
+export default function MainDrawer() {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
   const downLG = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
-  // responsive drawer container
-  const container = window !== undefined ? () => window().document.body : undefined;
 
   // header content
   const drawerContent = useMemo(() => <DrawerContent />, []);
@@ -36,7 +34,6 @@ export default function MainDrawer({ window }) {
         </MiniDrawerStyled>
       ) : (
         <Drawer
-          container={container}
           variant="temporary"
           open={drawerOpen}
           onClose={() => handlerDrawerOpen(!drawerOpen)}

@@ -11,22 +11,20 @@ const endpoints = {
   dashboard: '/dashboard' // server URL
 };
 
-export function useGetMenuMaster() {
+export function useGetMenuMaster(): { menuMaster?: { isDashboardDrawerOpened: boolean }; menuMasterLoading: boolean } {
   const { data, isLoading } = useSWR(endpoints.key + endpoints.master, () => initialState, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false
   });
 
-  const memoizedValue = useMemo(
+  return useMemo(
     () => ({
       menuMaster: data,
       menuMasterLoading: isLoading
     }),
     [data, isLoading]
   );
-
-  return memoizedValue;
 }
 
 export function handlerDrawerOpen(isDashboardDrawerOpened) {

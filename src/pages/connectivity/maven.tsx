@@ -35,7 +35,7 @@ export default function MavenConnectivityPage() {
   const query = useQuery({
     queryKey: ["maven-repositories"],
     queryFn: () =>
-      fetch("http://localhost/modelix/workspaces/connectivity/maven", {
+      fetch("http://localhost/modelix/workspaces/connectivity/maven/", {
         headers: {
           Authorization: `Bearer ${auth.user?.access_token}`,
         },
@@ -52,12 +52,7 @@ export default function MavenConnectivityPage() {
   return (
     <Stack spacing={4}>
       <Paper>
-        <Toolbar
-          sx={{
-            pl: { sm: 2 },
-            pr: { xs: 1, sm: 1 },
-          }}
-        >
+        <Toolbar sx={{pl: 3, pr: 3}}>
           <Typography sx={{ flex: "1 1 100%" }} component="div" variant="h5">
             Repositories
           </Typography>
@@ -76,7 +71,7 @@ export default function MavenConnectivityPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              { data.repositories.map((repo, index) => {
+              {data.repositories.map((repo, index) => {
                 return (
                   <TableRow key={index}>
                     <TableCell>{repo.id}</TableCell>
@@ -90,12 +85,7 @@ export default function MavenConnectivityPage() {
       </Paper>
 
       <Paper>
-        <Toolbar
-          sx={{
-            pl: { sm: 2 },
-            pr: { xs: 1, sm: 1 },
-          }}
-        >
+        <Toolbar sx={{pl: 3, pr: 3}}>
           <Typography sx={{ flex: "1 1 100%" }} component="div" variant="h5">
             Artifacts
           </Typography>
