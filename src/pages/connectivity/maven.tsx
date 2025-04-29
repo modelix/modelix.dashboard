@@ -13,7 +13,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import useWorkspacesService from "../../api/workspaces.ts";
-import { WSApi } from "../../api/workspaces.ts";
 import {useAuth} from "react-oidc-context";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from '@mui/icons-material/Edit';
@@ -21,6 +20,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CheckIcon from '@mui/icons-material/Check';
 import {useState} from "react";
 import TextField from "@mui/material/TextField";
+import { MavenRepository } from "@modelix/api-client-ts-axios"
 
 export default function MavenConnectivityPage() {
   const auth = useAuth();
@@ -35,9 +35,8 @@ function MavenConnectivityPageWhenAuthenticated() {
   const workspacesService = useWorkspacesService();
   const { isPending, error, data } = useQuery({
     queryKey: ["maven-repositories"],
-    queryFn: () => workspacesService.getMavenConnectorConfig(),
+    queryFn: () => workspacesService.getMavenConnectorConfig().then((res) => res.data),
   });
-
   if (isPending) return 'Loading...'
   if (error) return 'An error has occurred: ' + error.message
   
@@ -110,19 +109,19 @@ function MavenConnectivityPageWhenAuthenticated() {
   );
 }
 
-function RepositoryRow({ repo }: { repo: WSApi.MavenRepository }) {
+function RepositoryRow({ repo }: { repo: MavenRepository }) {
   const [editing, updateEditing] = useState(false);
   const [editedUrl, updateUrl] = useState(repo.url);
   const workspacesService = useWorkspacesService();
   const sendUpdate = useMutation({
     mutationFn: () => {
-      return workspacesService.updateMavenRepository({
-        repositoryId: repo.id!,
-        mavenRepository: {
-          ...repo,
-          url: editedUrl
-        }
-      })
+      return workspacesService.updateMavenRepository(
+          repo.id,
+          {
+            ...repo,
+            url: editedUrl
+          }
+      )
     }
   })
 
