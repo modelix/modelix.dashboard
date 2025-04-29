@@ -11,44 +11,36 @@ import Toolbar from "@mui/material/Toolbar";
 import AddIcon from "@mui/icons-material/Add";
 import Tooltip from "@mui/material/Tooltip";
 import Button from "@mui/material/Button";
-import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "react-oidc-context";
-
-interface MavenRepository {
-  id: string;
-  url: string;
-}
-
-interface MavenArtifact {
-  groupId: string;
-  artifactId: string;
-  version?: string;
-}
-
-interface MavenConfig {
-  repositories: MavenRepository[];
-  artifacts: MavenArtifact[];
-}
+import {useMutation, useQuery} from "@tanstack/react-query";
+import useWorkspacesService from "../../api/workspaces.ts";
+import { WSApi } from "../../api/workspaces.ts";
+import {useAuth} from "react-oidc-context";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
+import {useState} from "react";
+import TextField from "@mui/material/TextField";
 
 export default function MavenConnectivityPage() {
   const auth = useAuth();
-  const query = useQuery({
+  if (auth.isAuthenticated) {
+    return <MavenConnectivityPageWhenAuthenticated/>;
+  } else {
+    return "Login required";
+  }
+}
+
+function MavenConnectivityPageWhenAuthenticated() {
+  const workspacesService = useWorkspacesService();
+  const { isPending, error, data } = useQuery({
     queryKey: ["maven-repositories"],
-    queryFn: () =>
-      fetch("http://localhost/modelix/workspaces/connectivity/maven/", {
-        headers: {
-          Authorization: `Bearer ${auth.user?.access_token}`,
-        },
-      }).then((res) => res.json() as Promise<MavenConfig>),
+    queryFn: () => workspacesService.getMavenConnectorConfig(),
   });
-  const { isPending, error, data } = query;
 
   if (isPending) return 'Loading...'
-
   if (error) return 'An error has occurred: ' + error.message
-
-  if (data === undefined) return "No data received"
-
+  
   return (
     <Stack spacing={4}>
       <Paper>
@@ -68,16 +60,12 @@ export default function MavenConnectivityPage() {
               <TableRow>
                 <TableCell>ID</TableCell>
                 <TableCell>URL</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.repositories.map((repo, index) => {
-                return (
-                  <TableRow key={index}>
-                    <TableCell>{repo.id}</TableCell>
-                    <TableCell>{repo.url}</TableCell>
-                  </TableRow>
-                );
+              {data?.repositories?.map((repo, index) => {
+                return <RepositoryRow key={repo.id} repo={repo} />;
               })}
             </TableBody>
           </Table>
@@ -105,7 +93,7 @@ export default function MavenConnectivityPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.artifacts.map((artifact, index) => {
+              {data?.artifacts?.map((artifact, index) => {
                 return (
                   <TableRow key={index}>
                     <TableCell>{artifact.groupId}</TableCell>
@@ -119,5 +107,53 @@ export default function MavenConnectivityPage() {
         </TableContainer>
       </Paper>
     </Stack>
+  );
+}
+
+function RepositoryRow({ repo }: { repo: WSApi.MavenRepository }) {
+  const [editing, updateEditing] = useState(false);
+  const [editedUrl, updateUrl] = useState(repo.url);
+  const workspacesService = useWorkspacesService();
+  const sendUpdate = useMutation({
+    mutationFn: () => {
+      return workspacesService.updateMavenRepository({
+        repositoryId: repo.id!,
+        mavenRepository: {
+          ...repo,
+          url: editedUrl
+        }
+      })
+    }
+  })
+
+  function handleDelete() {}
+  function save() {
+    updateEditing(false);
+    sendUpdate.mutate();
+  }
+
+  return (
+    <TableRow key={repo.id}>
+      <TableCell>{repo.id}</TableCell>
+      <TableCell>{
+        editing
+            ? <TextField fullWidth value={editedUrl} onChange={(e) => updateUrl(e.target.value)}/>
+            : repo.url
+      }</TableCell>
+      <TableCell align="right">
+        {
+          editing
+              ? <IconButton onClick={save}>
+                  <CheckIcon/>
+                </IconButton>
+              : <IconButton onClick={() => updateEditing(true)}>
+                  <EditIcon />
+                </IconButton>
+        }
+        <IconButton onClick={handleDelete}>
+          <DeleteIcon />
+        </IconButton>
+      </TableCell>
+    </TableRow>
   );
 }
