@@ -2,3 +2,6 @@ onlyBuiltDependencies:
   - '@swc/core'
   - core-js
   - esbuild
+
+overrides:
+  '@modelix/api-client-ts-axios': link:../modelix.openapi/client-ts/build/generate/typescript-axios
