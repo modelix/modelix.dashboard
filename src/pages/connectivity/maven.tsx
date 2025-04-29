@@ -21,6 +21,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import {useState} from "react";
 import TextField from "@mui/material/TextField";
 import { MavenRepository } from "@modelix/api-client-ts-axios"
+import {useGetMavenConnectorConfigQuery} from "../../api/workspacesApi.ts";
 
 export default function MavenConnectivityPage() {
   const auth = useAuth();
@@ -32,14 +33,12 @@ export default function MavenConnectivityPage() {
 }
 
 function MavenConnectivityPageWhenAuthenticated() {
-  const workspacesService = useWorkspacesService();
-  const { isPending, error, data } = useQuery({
-    queryKey: ["maven-repositories"],
-    queryFn: () => workspacesService.getMavenConnectorConfig().then((res) => res.data),
-  });
-  if (isPending) return 'Loading...'
-  if (error) return 'An error has occurred: ' + error.message
-  
+  const q = useGetMavenConnectorConfigQuery()
+  if (q.isLoading) return 'Loading...'
+  if (q.isError) {
+    console.log(q.error)
+    return 'An error has occurred: ' + q.error
+  }
   return (
     <Stack spacing={4}>
       <Paper>
@@ -63,7 +62,7 @@ function MavenConnectivityPageWhenAuthenticated() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data?.repositories?.map((repo, index) => {
+              {q.data?.repositories?.map((repo, index) => {
                 return <RepositoryRow key={repo.id} repo={repo} />;
               })}
             </TableBody>
@@ -92,7 +91,7 @@ function MavenConnectivityPageWhenAuthenticated() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data?.artifacts?.map((artifact, index) => {
+              {q.data?.artifacts?.map((artifact, index) => {
                 return (
                   <TableRow key={index}>
                     <TableCell>{artifact.groupId}</TableCell>

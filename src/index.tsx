@@ -27,6 +27,9 @@ import '@fontsource/public-sans/700.css';
 import App from './App';
 import {AuthProvider} from "react-oidc-context";
 import {StrictMode} from "react";
+import {Provider} from "react-redux";
+import store from './app/store'
+import AuthTokenManager from "./components/AuthTokenManager.ts";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -40,7 +43,10 @@ const oidcConfig = {
 root.render(
     <StrictMode>
       <AuthProvider {...oidcConfig}>
-        <App />
+        <Provider store={store}>
+          <AuthTokenManager/>
+          <App />
+        </Provider>
       </AuthProvider>
     </StrictMode>
 );
