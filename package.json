@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-openapi": "npx @rtk-query/codegen-openapi openapi-config.json"
+    "generate-openapi": "npx @rtk-query/codegen-openapi openapi-gen-config.ts"
   },
   "dependencies": {
     "@ant-design/colors": "^8.0.0",
@@ -62,6 +62,7 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react-swc": "^3.9.0",
+    "esbuild-runner": "^2.2.2",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-jsx-a11y": "^6.10.2",

@@ -5,7 +5,7 @@ import {NavGroupData} from "../layout/Dashboard/Drawer/DrawerContent/Navigation/
 
 const workspaces: NavGroupData = {
   id: 'group-workspaces',
-  title: 'MPS Projects',
+  title: 'Workspaces',
   type: 'group',
   children: [
     {
@@ -13,22 +13,30 @@ const workspaces: NavGroupData = {
       title: 'MPS Assets',
       type: 'item',
       url: '/workspaces/mps-assets',
-      icon: () => <img alt="MPS" src={mpsIcon} width="16px" height="16px" />,
+      icon: () => <img alt="MPS" src={mpsIcon} width="16px" height="16px"/>,
       breadcrumbs: false
     },
     {
       id: 'workspace-templates',
-      title: 'Workspace Templates',
+      title: 'Templates',
       type: 'item',
-      url: '/workspaces/workspace-templates',
+      url: '/workspaces/templates',
+      icon: FileOutlined,
+      breadcrumbs: false
+    },
+    {
+      id: 'workspaces',
+      title: 'Workspaces',
+      type: 'item',
+      url: '/workspaces/workspaces',
       icon: FileOutlined,
       breadcrumbs: false
     },
     {
       id: 'workspaces-instances',
-      title: 'Workspace Instances',
+      title: 'Instances',
       type: 'item',
-      url: '/workspaces/workspace-instances',
+      url: '/workspaces/instances',
       icon: LaptopOutlined,
       breadcrumbs: false
     },

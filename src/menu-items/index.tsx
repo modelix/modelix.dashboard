@@ -6,6 +6,7 @@ import { NavGroupData } from "../layout/Dashboard/Drawer/DrawerContent/Navigatio
 import workspaces from "./workspaces";
 import {BranchesOutlined, CloudDownloadOutlined, CloudServerOutlined, HddOutlined} from "@ant-design/icons";
 import GitIcon from "../components/icons/GitIcon.tsx";
+import mpsIcon from "../assets/images/mps-logo.png";
 
 const connectivity: NavGroupData = {
   id: 'group-connectivity',
@@ -38,7 +39,13 @@ const connectivity: NavGroupData = {
 
 
 const menuItems: { items: NavGroupData[] } = {
-  items: [connectivity, workspaces, repositories, dashboard, pages, support],
+  items: [
+      connectivity,
+      workspaces,
+      repositories,
+      support,
+      pages
+  ],
 };
 
 export default menuItems;

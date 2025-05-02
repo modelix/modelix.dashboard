@@ -9,6 +9,7 @@ import UploadsConnectivityPage from "./pages/connectivity/uploads.tsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import Typography from "@mui/material/Typography";
 import {useAuth} from "react-oidc-context";
+import WorkspacesList from "./pages/workspaces/workspaces.tsx";
 
 const queryClient = new QueryClient()
 
@@ -26,6 +27,9 @@ export default function App() {
                     <Route path="maven" element={<MavenConnectivityPage />} />
                     <Route path="git" element={<GitConnectivityPage />} />
                     <Route path="uploads" element={<UploadsConnectivityPage />} />
+                  </Route>
+                  <Route path="workspaces">
+                    <Route path="workspaces" element={<WorkspacesList/>} />
                   </Route>
                   <Route path="jwt" element={<Typography>{auth.user?.access_token ?? auth.user?.id_token}</Typography>} />
                 </Route>
