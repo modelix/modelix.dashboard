@@ -24,7 +24,7 @@ import {
   useDeleteMavenRepositoryMutation,
   useGetMavenConnectorConfigQuery, useUpdateMavenArtifactMutation,
   useUpdateMavenRepositoryMutation,
-} from "../../api/workspacesApi.ts";
+} from "../../api/mavenConnectorApi.ts";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 
 export default function MavenConnectivityPage() {
