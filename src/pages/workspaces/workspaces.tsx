@@ -1,5 +1,5 @@
 import {
-  GitRepository, MavenRepository, useCreateInstanceMutation,
+  GitRepository, MavenRepository, useCreateInstanceMutation, useDeleteInstanceMutation,
   useDeleteWorkspaceMutation, useEnableInstanceMutation, useListInstancesQuery,
   useListWorkspacesQuery,
   useUpdateWorkspaceMutation,
@@ -31,6 +31,7 @@ import Tooltip from "@mui/material/Tooltip";
 import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
 import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
 import {useAuth} from "react-oidc-context";
+import Stack from "@mui/material/Stack";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -89,7 +90,6 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
     newInstanceMutation({
       workspaceInstance: {
         id: '',
-        workspaceId: workspace.id,
         config: workspace,
         owner: auth.user?.profile?.preferred_username,
         enabled: true,
@@ -287,7 +287,7 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                   <RocketLaunchIcon />
                 </IconButton>
                 <IconButton onClick={() => setInstancesExpanded(!instancesExpanded)}>
-                  <ExpandMoreIcon />
+                  { instancesExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon /> }
                 </IconButton>
               </>
             }
@@ -330,19 +330,28 @@ function InstancesListComponent({ workspaceId } : { workspaceId: string } ) : Re
 
 function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
   const [enableInstanceMutation, enableInstanceMutationResult] = useEnableInstanceMutation()
+  const [deleteInstanceMutation, deleteInstanceMutationResult] = useDeleteInstanceMutation()
   
   function enableInstance(enabled: boolean) {
-    enableInstanceMutation({ instanceId: instance.id, body: { enabled } })
+    enableInstanceMutation({ instanceId: instance.id, workspaceInstanceEnabled: { enabled: enabled } })
   }
   function toggleEnabled() {
     enableInstance(!instance.enabled)
   }
+  function deleteInstance() {
+    deleteInstanceMutation({ instanceId: instance.id })
+  }
   
   return <Fragment key={instance.id}>
     <Typography sx={{ gridColumnStart: 1 }}>{ instance.name ?? instance.id }</Typography>
-    <IconButton disabled={enableInstanceMutationResult.isLoading} onClick={toggleEnabled}>
-      { instance.enabled ? <StopCircleOutlinedIcon /> : <PlayCircleOutlineIcon /> }
-    </IconButton>
+    <Stack direction="row" spacing={0}>
+      <IconButton disabled={enableInstanceMutationResult.isLoading} onClick={toggleEnabled}>
+        { instance.enabled ? <StopCircleOutlinedIcon /> : <PlayCircleOutlineIcon /> }
+      </IconButton>
+      <IconButton disabled={deleteInstanceMutationResult.isLoading} onClick={deleteInstance}>
+        <DeleteIcon />
+      </IconButton>
+    </Stack>
   </Fragment>
 }
 
