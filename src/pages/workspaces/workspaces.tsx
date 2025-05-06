@@ -1,12 +1,18 @@
 import {
-  GitRepository, MavenRepository, useCreateInstanceMutation, useDeleteInstanceMutation,
-  useDeleteWorkspaceMutation, useEnableInstanceMutation, useListInstancesQuery,
+  GitRepository,
+  MavenRepository,
+  useCreateInstanceMutation,
+  useDeleteInstanceMutation,
+  useDeleteWorkspaceMutation,
+  useEnableInstanceMutation,
+  useListInstancesQuery,
   useListWorkspacesQuery,
   useUpdateWorkspaceMutation,
-  WorkspaceConfig, WorkspaceInstance,
+  WorkspaceConfig,
+  WorkspaceInstance,
 } from "../../api/workspacesApi.ts";
 import Typography from "@mui/material/Typography";
-import {Fragment, ReactNode, useState} from "react";
+import { Fragment, ReactNode, useState } from "react";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
@@ -18,19 +24,19 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
-import {CardActions, CircularProgress, Select} from "@mui/material";
+import { CircularProgress, Select } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Collapse from "@mui/material/Collapse";
 import MenuItem from "@mui/material/MenuItem";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Divider from "@mui/material/Divider";
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import ErrorIcon from '@mui/icons-material/Error';
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import ErrorIcon from "@mui/icons-material/Error";
 import Tooltip from "@mui/material/Tooltip";
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
-import {useAuth} from "react-oidc-context";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
+import { useAuth } from "react-oidc-context";
 import Stack from "@mui/material/Stack";
 
 export default function WorkspacesList() {
@@ -64,11 +70,13 @@ function WorkspacesTable({ workspaces }: { workspaces: WorkspaceConfig[] }) {
 function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
   const auth = useAuth();
   const [expanded, setExpanded] = useState(false);
-  const [instancesExpanded, setInstancesExpanded] = useState(false);
-  const [modifiedData, setModifiedData] = useState<WorkspaceConfig | null>(null);
+  const [instancesExpanded, setInstancesExpanded] = useState(true);
+  const [modifiedData, setModifiedData] = useState<WorkspaceConfig | null>(
+    null,
+  );
   const [sendUpdate, mutationResult] = useUpdateWorkspaceMutation();
   const [deleteWorkspace, deletionResult] = useDeleteWorkspaceMutation();
-  const [newInstanceMutation, newInstanceResult] = useCreateInstanceMutation()
+  const [newInstanceMutation, newInstanceResult] = useCreateInstanceMutation();
   const editingMode = modifiedData !== null;
   const dataToShow = modifiedData ?? workspace;
 
@@ -89,13 +97,13 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
   function launchInstance() {
     newInstanceMutation({
       workspaceInstance: {
-        id: '',
+        id: "",
         config: workspace,
         owner: auth.user?.profile?.preferred_username,
         enabled: true,
-        state: 'CREATED'
-      }
-    }).then(() => setInstancesExpanded(true))
+        state: "CREATED",
+      },
+    }).then(() => setInstancesExpanded(true));
   }
 
   return (
@@ -222,13 +230,13 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                 Memory Limit
               </Typography>
               <TextField
-                  value={dataToShow.memoryLimit}
-                  onChange={(e) =>
-                      setModifiedData({
-                        ...dataToShow,
-                        memoryLimit: e.target.value ?? "",
-                      })
-                  }
+                value={dataToShow.memoryLimit}
+                onChange={(e) =>
+                  setModifiedData({
+                    ...dataToShow,
+                    memoryLimit: e.target.value ?? "",
+                  })
+                }
               />
               <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                 Git Repositories
@@ -243,10 +251,10 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                   items={dataToShow.gitRepositories}
                   newItemTemplate={{ url: "" }}
                   onListChange={(newList) =>
-                      setModifiedData({
-                        ...dataToShow,
-                        gitRepositories: newList,
-                      })
+                    setModifiedData({
+                      ...dataToShow,
+                      gitRepositories: newList,
+                    })
                   }
                   updateItem={(item, newValue) => ({ ...item, url: newValue })}
                   itemText={(item) => item.url}
@@ -265,10 +273,10 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                   items={dataToShow.mavenRepositories ?? []}
                   newItemTemplate={{ url: "" }}
                   onListChange={(newList) =>
-                      setModifiedData({
-                        ...dataToShow,
-                        mavenRepositories: newList,
-                      })
+                    setModifiedData({
+                      ...dataToShow,
+                      mavenRepositories: newList,
+                    })
                   }
                   updateItem={(item, newValue) => ({ ...item, url: newValue })}
                   itemText={(item) => item.url}
@@ -277,94 +285,129 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
             </Box>
           </CardContent>
         </Collapse>
-        <Divider/>
+        <Divider />
         <CardHeader
-            title="Instances"
-            slotProps={{title: {variant: "h6"}}}
-            action={
-              <>
-                <IconButton disabled={newInstanceResult.isLoading} onClick={launchInstance}>
-                  <RocketLaunchIcon />
-                </IconButton>
-                <IconButton onClick={() => setInstancesExpanded(!instancesExpanded)}>
-                  { instancesExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon /> }
-                </IconButton>
-              </>
-            }
+          title="Instances"
+          slotProps={{ title: { variant: "h6" } }}
+          action={
+            <>
+              <IconButton
+                disabled={newInstanceResult.isLoading}
+                onClick={launchInstance}
+              >
+                <RocketLaunchIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => setInstancesExpanded(!instancesExpanded)}
+              >
+                {instancesExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </IconButton>
+            </>
+          }
         />
-        { instancesExpanded &&
-            <InstancesListComponent workspaceId={workspace.id} />
-        }
+        {instancesExpanded && (
+          <InstancesListComponent workspaceId={workspace.id} />
+        )}
       </Card>
     </Grid>
   );
 }
 
-function InstancesListComponent({ workspaceId } : { workspaceId: string } ) : ReactNode {
-  const instancesQuery = useListInstancesQuery({ workspaceId : workspaceId }, { pollingInterval: 1000, });
-  
-  const instances = instancesQuery.data?.instances ?? []
+function InstancesListComponent({
+  workspaceId,
+}: {
+  workspaceId: string;
+}): ReactNode {
+  const instancesQuery = useListInstancesQuery(
+    { workspaceId: workspaceId },
+    { pollingInterval: 1000 },
+  );
+
+  const instances = instancesQuery.data?.instances ?? [];
   if (instancesQuery.isLoading) return <CircularProgress />;
   if (instancesQuery.isError) {
-    return <Tooltip title={JSON.stringify(instancesQuery.error, null, 2)}>
-      <ErrorIcon />
-    </Tooltip>;
+    return (
+      <Tooltip title={JSON.stringify(instancesQuery.error, null, 2)}>
+        <ErrorIcon />
+      </Tooltip>
+    );
   }
-  
+
   return (
-    <CardContent sx={{
-      display: "grid",
-      gridTemplateColumns: "1fr max-content",
-      columnGap: 3,
-      rowGap: 1,
-      alignItems: "center",
-    }}>
-      {
-        instances.map((instance, index) =>
-          <InstanceComponent key={instance.id} instance={instance} />
-        )
-      }
+    <CardContent
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "1fr max-content max-content",
+        columnGap: 3,
+        rowGap: 1,
+        alignItems: "center",
+      }}
+    >
+      {instances.map((instance, index) => (
+        <InstanceComponent key={instance.id} instance={instance} />
+      ))}
     </CardContent>
   );
 }
 
 function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
-  const [enableInstanceMutation, enableInstanceMutationResult] = useEnableInstanceMutation()
-  const [deleteInstanceMutation, deleteInstanceMutationResult] = useDeleteInstanceMutation()
-  
+  const [enableInstanceMutation, enableInstanceMutationResult] =
+    useEnableInstanceMutation();
+  const [deleteInstanceMutation, deleteInstanceMutationResult] =
+    useDeleteInstanceMutation();
+
   function enableInstance(enabled: boolean) {
-    enableInstanceMutation({ instanceId: instance.id, workspaceInstanceEnabled: { enabled: enabled } })
+    enableInstanceMutation({
+      instanceId: instance.id,
+      workspaceInstanceEnabled: { enabled: enabled },
+    });
   }
   function toggleEnabled() {
-    enableInstance(!instance.enabled)
+    enableInstance(!instance.enabled);
   }
   function deleteInstance() {
-    deleteInstanceMutation({ instanceId: instance.id })
+    deleteInstanceMutation({ instanceId: instance.id });
   }
-  
-  return <Fragment key={instance.id}>
-    <Typography sx={{ gridColumnStart: 1 }}>{ instance.name ?? instance.id }</Typography>
-    <Stack direction="row" spacing={0}>
-      <IconButton disabled={enableInstanceMutationResult.isLoading} onClick={toggleEnabled}>
-        { instance.enabled ? <StopCircleOutlinedIcon /> : <PlayCircleOutlineIcon /> }
-      </IconButton>
-      <IconButton disabled={deleteInstanceMutationResult.isLoading} onClick={deleteInstance}>
-        <DeleteIcon />
-      </IconButton>
-    </Stack>
-  </Fragment>
+
+  return (
+    <Fragment key={instance.id}>
+      <Typography sx={{ gridColumnStart: 1 }}>
+        {instance.name ?? instance.id}
+      </Typography>
+      <Typography color="textSecondary">{instance.state}</Typography>
+      <Stack direction="row" spacing={0}>
+        <IconButton
+          disabled={enableInstanceMutationResult.isLoading}
+          onClick={toggleEnabled}
+        >
+          {instance.enabled ? (
+            <StopCircleOutlinedIcon />
+          ) : (
+            <PlayCircleOutlineIcon />
+          )}
+        </IconButton>
+        <IconButton
+          disabled={deleteInstanceMutationResult.isLoading}
+          onClick={deleteInstance}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Stack>
+    </Fragment>
+  );
 }
 
 function EditableList<E>(props: {
-  items: E[],
-  newItemTemplate: E,
-  onListChange: (items: E[]) => void,
-  updateItem: (item: E, newValue: string) => E,
-  itemText: (item: E) => string
+  items: E[];
+  newItemTemplate: E;
+  onListChange: (items: E[]) => void;
+  updateItem: (item: E, newValue: string) => E;
+  itemText: (item: E) => string;
 }) {
-  const listAndNew = props.items.concat(props.newItemTemplate)
+  const listAndNew = props.items.concat(props.newItemTemplate);
 
-  return <Box
+  return (
+    <Box
       sx={{
         display: "grid",
         gridTemplateColumns: "1fr max-content",
@@ -372,37 +415,36 @@ function EditableList<E>(props: {
         rowGap: 1,
         alignItems: "center",
       }}
-  >
-    {listAndNew.map((item, index) => (
+    >
+      {listAndNew.map((item, index) => (
         <Fragment key={index}>
           <TextField
-              key={index}
-              sx={{ gridColumnStart: 1 }}
-              label={
-                index === listAndNew.length - 1
-                    ? "Add New"
-                    : undefined
-              }
-              value={props.itemText(item)}
-              onChange={(e) =>
-                  props.onListChange((index === listAndNew.length - 1
-                          ? listAndNew
-                          : props.items
-                  ).map((r, i) =>
-                      i === index ? props.updateItem(r, e.target.value) : r,
-                  ))
-              }
+            key={index}
+            sx={{ gridColumnStart: 1 }}
+            label={index === listAndNew.length - 1 ? "Add New" : undefined}
+            value={props.itemText(item)}
+            onChange={(e) =>
+              props.onListChange(
+                (index === listAndNew.length - 1
+                  ? listAndNew
+                  : props.items
+                ).map((r, i) =>
+                  i === index ? props.updateItem(r, e.target.value) : r,
+                ),
+              )
+            }
           />
           {index < listAndNew.length - 1 && (
-              <IconButton
-                  onClick={() =>
-                      props.onListChange(props.items.filter((_, i) => i !== index))
-                  }
-              >
-                <DeleteIcon />
-              </IconButton>
+            <IconButton
+              onClick={() =>
+                props.onListChange(props.items.filter((_, i) => i !== index))
+              }
+            >
+              <DeleteIcon />
+            </IconButton>
           )}
         </Fragment>
-    ))}
-  </Box>;
+      ))}
+    </Box>
+  );
 }
