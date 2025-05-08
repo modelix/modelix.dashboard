@@ -7,7 +7,6 @@
   "compilerOptions": {
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noUnusedVariable": false,
     "noImplicitAny": false
   }
 }

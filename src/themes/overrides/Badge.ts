@@ -1,9 +1,10 @@
 // project imports
 import getColors from '../../utils/getColors';
+import {Theme} from "@mui/material/styles";
 
 // ==============================|| BADGE - COLORS ||============================== //
 
-function getColorStyle({ color, theme }) {
+function getColorStyle({ color, theme }: { color: string, theme: Theme }) {
   const colors = getColors(theme, color);
   const { lighter, main } = colors;
 
@@ -15,7 +16,7 @@ function getColorStyle({ color, theme }) {
 
 // ==============================|| OVERRIDES - BADGE ||============================== //
 
-export default function Badge(theme) {
+export default function Badge(theme: Theme) {
   const defaultLightBadge = getColorStyle({ color: 'primary', theme });
 
   return {

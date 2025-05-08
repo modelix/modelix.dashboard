@@ -4,15 +4,11 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
-  const API_URL = `${env.VITE_APP_BASE_NAME}`;
-  const PORT = 3000;
 
   return {
     server: {
-      // this ensures that the browser opens upon server start
       open: true,
-      // this sets a default port to 3000
-      port: PORT,
+      port: 3000,
       host: true
     },
     preview: {
@@ -39,7 +35,7 @@ export default defineConfig(({ mode }) => {
         // },
       ]
     },
-    base: API_URL,
+    base: '/modelix/dashboard/',
     plugins: [react(), tsconfigPaths()]
   };
 });

@@ -10,7 +10,7 @@ const repositories: NavGroupData = {
       id: 'repositories',
       title: 'Repositories',
       type: 'item',
-      url: '/repositories/default',
+      route: '/repositories/default',
       icon: ClusterOutlined,
       breadcrumbs: false
     }

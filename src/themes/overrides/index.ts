@@ -25,10 +25,11 @@ import TableRow from './TableRow';
 import Tabs from './Tabs';
 import Tooltip from './Tooltip';
 import Typography from './Typography';
+import {Theme} from "@mui/material/styles";
 
 // ==============================|| OVERRIDES - MAIN ||============================== //
 
-export default function ComponentsOverrides(theme) {
+export default function ComponentsOverrides(theme: Theme) {
   return merge(
     Badge(theme),
     Button(theme),

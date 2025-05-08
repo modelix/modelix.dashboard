@@ -1,9 +1,12 @@
 // ==============================|| OVERRIDES - TABLE ROW ||============================== //
 
-export default function TableBody(theme) {
+import {Theme} from "@mui/material/styles";
+import {CustomPaletteColor} from "../theme";
+
+export default function TableBody(theme: Theme) {
   const hoverStyle = {
     '&:hover': {
-      backgroundColor: theme.palette.secondary.lighter
+      backgroundColor: (theme.palette.secondary as CustomPaletteColor).lighter
     }
   };
 

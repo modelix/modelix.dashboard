@@ -16,6 +16,7 @@ import { DRAWER_WIDTH, MINI_DRAWER_WIDTH } from '../../../config';
 // assets
 import MenuFoldOutlined from '@ant-design/icons/MenuFoldOutlined';
 import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
+import {Theme} from "@mui/material/styles";
 
 // ==============================|| MAIN LAYOUT - HEADER ||============================== //
 
@@ -23,7 +24,7 @@ export default function Header() {
   const downLG = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
   const { menuMaster } = useGetMenuMaster();
-  const drawerOpen = menuMaster.isDashboardDrawerOpened;
+  const drawerOpen = menuMaster?.isDashboardDrawerOpened ?? false;
 
   // header content
   const headerContent = useMemo(() => <HeaderContent />, []);
@@ -37,11 +38,13 @@ export default function Header() {
         edge="start"
         color="secondary"
         variant="light"
-        sx={(theme) => ({
-          color: 'text.primary',
-          bgcolor: drawerOpen ? 'transparent' : 'grey.100',
-          ...theme.applyStyles('dark', { bgcolor: drawerOpen ? 'transparent' : 'background.default' }),
-          ml: { xs: 0, lg: -2 }
+        sx={(theme: Theme) => ({
+          color: "text.primary",
+          bgcolor: drawerOpen ? "transparent" : "grey.100",
+          ...theme.applyStyles("dark", {
+            bgcolor: drawerOpen ? "transparent" : "background.default",
+          }),
+          ml: { xs: 0, lg: -2 },
         })}
       >
         {!drawerOpen ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -61,7 +64,7 @@ export default function Header() {
       zIndex: 1200,
       width: { xs: '100%', lg: drawerOpen ? `calc(100% - ${DRAWER_WIDTH}px)` : `calc(100% - ${MINI_DRAWER_WIDTH}px)` }
     }
-  };
+  } as any;
 
   return (
     <>

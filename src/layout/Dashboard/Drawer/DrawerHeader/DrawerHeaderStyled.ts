@@ -1,5 +1,5 @@
 // material-ui
-import { styled } from '@mui/material/styles';
+import {styled, Theme as MaterialTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 
 // ==============================|| DRAWER HEADER - STYLED ||============================== //
@@ -12,7 +12,7 @@ const DrawerHeaderStyled = styled(Box, { shouldForwardProp: (prop) => prop !== '
   paddingLeft: theme.spacing(0),
   variants: [
     {
-      props: ({ open }) => open,
+      props: ({ open }: any) => open,
       style: { justifyContent: 'flex-start', paddingLeft: theme.spacing(3) }
     }
   ]

@@ -10,24 +10,25 @@ import Box from '@mui/material/Box';
 
 // project imports
 import Search from './Search';
-import Profile from './Profile/index.js';
+import Profile from './Profile';
 import IconButton from '../../../../components/@extended/IconButton';
 import Transitions from '../../../../components/@extended/Transitions';
 
 // assets
 import MoreOutlined from '@ant-design/icons/MoreOutlined';
+import {Theme} from "@mui/material/styles";
 
 // ==============================|| HEADER CONTENT - MOBILE ||============================== //
 
 export default function MobileSection() {
   const [open, setOpen] = useState(false);
-  const anchorRef = useRef(null);
+  const anchorRef = useRef<any>(null);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event: any) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -48,7 +49,7 @@ export default function MobileSection() {
     <>
       <Box sx={{ flexShrink: 0, ml: 0.75 }}>
         <IconButton
-          sx={(theme) => ({
+          sx={(theme: Theme) => ({
             color: 'text.primary',
             bgcolor: open ? 'grey.300' : 'grey.100',
             ...theme.applyStyles('dark', { bgcolor: open ? 'grey.200' : 'background.default' })
@@ -85,7 +86,7 @@ export default function MobileSection() {
       >
         {({ TransitionProps }) => (
           <Transitions type="fade" in={open} {...TransitionProps}>
-            <Paper sx={(theme) => ({ boxShadow: theme.customShadows.z1 })}>
+            <Paper sx={(theme) => ({ boxShadow: (theme as any).customShadows.z1 })}>
               <ClickAwayListener onClickAway={handleClose}>
                 <AppBar color="inherit">
                   <Toolbar>

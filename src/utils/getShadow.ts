@@ -1,6 +1,6 @@
 // ==============================|| CUSTOM FUNCTION - COLOR SHADOWS ||============================== //
 
-export default function getShadow(theme, shadow) {
+export default function getShadow(theme: any, shadow: string) {
   switch (shadow) {
     case 'secondary':
       return theme.customShadows.secondary;

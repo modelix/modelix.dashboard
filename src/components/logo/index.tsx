@@ -8,10 +8,10 @@ import {Path} from "react-router";
 
 // ==============================|| MAIN LOGO ||============================== //
 
-export default function LogoSection({ reverse, isIcon, sx, to }: { reverse: boolean; isIcon: boolean; sx: SxProps<Theme>; to: string | Partial<Path> }) {
+export default function LogoSection({ isIcon, sx, to }: { isIcon: boolean; sx: SxProps<Theme>; to?: string | Partial<Path> }) {
   return (
-    <ButtonBase disableRipple component={Link} to={to || import.meta.env.VITE_APP_BASE_NAME} sx={sx}>
-      {isIcon ? <LogoIcon /> : <Logo reverse={reverse} />}
+    <ButtonBase disableRipple component={Link} to={to || import.meta.env.BASE_URL} sx={sx}>
+      {isIcon ? <LogoIcon /> : <Logo />}
     </ButtonBase>
   );
 }

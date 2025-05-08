@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
-import { useMemo } from 'react';
+import {ReactNode, useMemo} from 'react';
 
 // material-ui
 //import StyledEngineProvider from '@mui/material/StyledEngineProvider';
-import {createTheme, StyledEngineProvider, ThemeProvider} from '@mui/material/styles';
+import {createTheme, Direction, StyledEngineProvider, ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 // project imports
@@ -15,7 +14,7 @@ import componentsOverride from './overrides';
 
 // ==============================|| DEFAULT THEME - MAIN ||============================== //
 
-export default function ThemeCustomization({ children }) {
+export default function ThemeCustomization({ children }: { children: ReactNode }) {
   const theme = Palette('light', 'default');
 
   const themeTypography = Typography(`'Public Sans', sans-serif`);
@@ -47,7 +46,7 @@ export default function ThemeCustomization({ children }) {
     [theme, themeTypography, themeCustomShadows]
   );
 
-  const themes = createTheme(themeOptions);
+  const themes = createTheme(themeOptions as any);
   themes.components = componentsOverride(themes);
 
   return (
@@ -59,5 +58,3 @@ export default function ThemeCustomization({ children }) {
     </StyledEngineProvider>
   );
 }
-
-ThemeCustomization.propTypes = { children: PropTypes.node };

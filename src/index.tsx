@@ -1,7 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import './assets/style.css';
 import 'simplebar-react/dist/simplebar.min.css';
-import './assets/third-party/apex-chart.css';
 import './assets/third-party/react-table.css';
 
 import '@fontsource/roboto/400.css';
@@ -34,15 +33,16 @@ import AuthTokenManager from "./components/AuthTokenManager.ts";
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
-const oidcConfig = {
-  authority: import.meta.env.VITE_OIDC_AUTHORITY,
-  client_id: import.meta.env.VITE_OIDC_CLIENT_ID,
-  redirect_uri: import.meta.env.VITE_OIDC_REDIRECT_URI,
-};
+const keycloakUrl = `https://${window.location.host}/realms/modelix/`
+const appUrl = `${window.location.protocol}//${window.location.host}${import.meta.env.BASE_URL}`
 
 root.render(
     <StrictMode>
-      <AuthProvider {...oidcConfig}>
+      <AuthProvider
+          authority={keycloakUrl}
+          client_id={import.meta.env.VITE_OIDC_CLIENT_ID}
+          redirect_uri={appUrl}
+      >
         <Provider store={store}>
           <AuthTokenManager/>
           <App />

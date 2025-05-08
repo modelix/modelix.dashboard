@@ -1,6 +1,8 @@
 // ==============================|| OVERRIDES - LIST ITEM ICON ||============================== //
 
-export default function ListItemIcon(theme) {
+import {Theme} from "@mui/material/styles";
+
+export default function ListItemIcon(theme: Theme) {
   return {
     MuiListItemIcon: {
       styleOverrides: {

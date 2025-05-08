@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -17,6 +16,11 @@ import navigation from '../../menu-items';
 import ApartmentOutlined from '@ant-design/icons/ApartmentOutlined';
 import HomeOutlined from '@ant-design/icons/HomeOutlined';
 import HomeFilled from '@ant-design/icons/HomeFilled';
+import {
+  NavGroupData,
+  NavItemBaseData,
+  NavItemData
+} from "../../layout/Dashboard/Drawer/DrawerContent/Navigation/NavGroup.tsx";
 
 export default function Breadcrumbs({
   card = false,
@@ -33,12 +37,12 @@ export default function Breadcrumbs({
   titleBottom = true,
   sx,
   ...others
-}) {
+}: any) {
   const theme = useTheme();
   const location = useLocation();
 
-  const [main, setMain] = useState();
-  const [item, setItem] = useState();
+  const [main, setMain] = useState<NavItemBaseData | undefined>();
+  const [item, setItem] = useState<NavItemBaseData | undefined>();
 
   const iconSX = {
     marginRight: theme.spacing(0.75),
@@ -70,9 +74,9 @@ export default function Breadcrumbs({
   });
 
   // set active item state
-  const getCollapse = (menu) => {
+  const getCollapse = (menu: any) => {
     if (!custom && menu.children) {
-      menu.children.filter((collapse) => {
+      menu.children.filter((collapse: any) => {
         if (collapse.type && collapse.type === 'collapse') {
           getCollapse(collapse);
           if (collapse.url === customLocation) {
@@ -97,7 +101,7 @@ export default function Breadcrumbs({
   let mainContent;
   let itemContent;
   let breadcrumbContent = <Typography />;
-  let itemTitle = '';
+  let itemTitle: string | undefined = '';
   let CollapseIcon;
   let ItemIcon;
 
@@ -181,7 +185,7 @@ export default function Breadcrumbs({
     if (custom && links && links?.length > 0) {
       tempContent = (
         <MuiBreadcrumbs aria-label="breadcrumb" maxItems={maxItems || 8} separator={separatorIcon}>
-          {links?.map((link, index) => {
+          {links?.map((link: any, index: number) => {
             CollapseIcon = link.icon ? link.icon : ApartmentOutlined;
 
             return (
@@ -238,20 +242,3 @@ export default function Breadcrumbs({
 
   return breadcrumbContent;
 }
-
-Breadcrumbs.propTypes = {
-  card: PropTypes.bool,
-  custom: PropTypes.bool,
-  divider: PropTypes.bool,
-  heading: PropTypes.string,
-  icon: PropTypes.bool,
-  icons: PropTypes.bool,
-  links: PropTypes.array,
-  maxItems: PropTypes.number,
-  rightAlign: PropTypes.bool,
-  separator: PropTypes.any,
-  title: PropTypes.bool,
-  titleBottom: PropTypes.bool,
-  sx: PropTypes.any,
-  others: PropTypes.any
-};

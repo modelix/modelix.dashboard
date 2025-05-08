@@ -13,13 +13,13 @@ const AppBarStyled = styled(AppBar, { shouldForwardProp: (prop) => prop !== 'ope
   }),
   variants: [
     {
-      props: ({ open }) => !open,
+      props: ({ open }: any) => !open,
       style: {
         width: `calc(100% - ${theme.spacing(7.5)})`
       }
     },
     {
-      props: ({ open }) => open,
+      props: ({ open }: any) => open,
       style: {
         marginLeft: DRAWER_WIDTH,
         width: `calc(100% - ${DRAWER_WIDTH}px)`,

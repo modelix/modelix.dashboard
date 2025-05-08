@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
-
 // third-party
 import { motion, useCycle } from 'framer-motion';
 
-export default function AnimateButton({ children, type = 'scale', direction = 'right', offset = 10, scale = { hover: 1.05, tap: 0.954 } }) {
+export default function AnimateButton({ children, type = 'scale', direction = 'right', offset = 10, scale = { hover: 1.05, tap: 0.954 } }: any) {
   let offset1;
   let offset2;
   switch (direction) {
@@ -67,11 +65,3 @@ export default function AnimateButton({ children, type = 'scale', direction = 'r
       );
   }
 }
-
-AnimateButton.propTypes = {
-  children: PropTypes.node,
-  type: PropTypes.oneOf(['slide', 'scale', 'rotate']),
-  direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
-  offset: PropTypes.number,
-  scale: PropTypes.object
-};

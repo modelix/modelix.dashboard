@@ -6,7 +6,7 @@ import {selectAccessToken} from "../features/auth/authSlice.ts";
 export const emptySplitApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost',
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers, { getState }: any) => {
       // Get the token from the Redux store
       const token = selectAccessToken(getState()); // Use the selector
       // Or directly access: const token = getState().auth.accessToken;

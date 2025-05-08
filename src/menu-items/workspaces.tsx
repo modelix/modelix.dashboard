@@ -12,7 +12,7 @@ const workspaces: NavGroupData = {
       id: 'mps-assets',
       title: 'MPS Assets',
       type: 'item',
-      url: '/workspaces/mps-assets',
+      route: '/workspaces/mps-assets',
       icon: () => <img alt="MPS" src={mpsIcon} width="16px" height="16px"/>,
       breadcrumbs: false
     },
@@ -20,7 +20,7 @@ const workspaces: NavGroupData = {
       id: 'workspace-templates',
       title: 'Templates',
       type: 'item',
-      url: '/workspaces/templates',
+      route: '/workspaces/templates',
       icon: FileOutlined,
       breadcrumbs: false
     },
@@ -28,7 +28,7 @@ const workspaces: NavGroupData = {
       id: 'workspaces',
       title: 'Workspaces',
       type: 'item',
-      url: '/workspaces/workspaces',
+      route: '/workspaces/workspaces',
       icon: FileOutlined,
       breadcrumbs: false
     },
@@ -36,7 +36,7 @@ const workspaces: NavGroupData = {
       id: 'workspaces-instances',
       title: 'Instances',
       type: 'item',
-      url: '/workspaces/instances',
+      route: '/workspaces/instances',
       icon: LaptopOutlined,
       breadcrumbs: false
     },

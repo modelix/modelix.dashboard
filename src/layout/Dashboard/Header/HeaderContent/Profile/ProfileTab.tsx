@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 // material-ui
 import List from '@mui/material/List';
@@ -19,9 +18,10 @@ import {AuthContextProps, useAuth} from "react-oidc-context";
 
 export default function ProfileTab() {
   const auth = useAuth();
+  const accountUrl = `https://${window.location.host}/realms/modelix/account/`
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <ListItemButton onClick={() => window.open(import.meta.env.VITE_OIDC_PROFILE_URI, "_blank")}>
+      <ListItemButton onClick={() => window.open(accountUrl, "_blank")}>
         <ListItemIcon>
           <UserOutlined />
         </ListItemIcon>
@@ -47,5 +47,3 @@ export default function ProfileTab() {
     </List>
   );
 }
-
-ProfileTab.propTypes = { handleLogout: PropTypes.func };
