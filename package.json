@@ -41,7 +41,7 @@
     "framer-motion": "^12.9.1",
     "keycloak-js": "^26.1.5",
     "lodash-es": "^4.17.21",
-    "oidc-client-ts": "^3.2.0",
+    "oidc-client-ts": "^3.2.1",
     "prop-types": "^15.8.1",
     "react": "^19.1.0",
     "react-device-detect": "^2.2.3",
