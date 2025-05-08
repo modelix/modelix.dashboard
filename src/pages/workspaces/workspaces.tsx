@@ -38,6 +38,7 @@ import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
 import { useAuth } from "react-oidc-context";
 import Stack from "@mui/material/Stack";
+import mpsIcon from "../../assets/images/mps-logo.png";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -70,7 +71,6 @@ function WorkspacesTable({ workspaces }: { workspaces: WorkspaceConfig[] }) {
 function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
   const auth = useAuth();
   const [expanded, setExpanded] = useState(false);
-  const [instancesExpanded, setInstancesExpanded] = useState(true);
   const [modifiedData, setModifiedData] = useState<WorkspaceConfig | null>(
     null,
   );
@@ -103,7 +103,7 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
         enabled: true,
         state: "CREATED",
       },
-    }).then(() => setInstancesExpanded(true));
+    });
   }
 
   return (
@@ -297,17 +297,10 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
               >
                 <RocketLaunchIcon />
               </IconButton>
-              <IconButton
-                onClick={() => setInstancesExpanded(!instancesExpanded)}
-              >
-                {instancesExpanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-              </IconButton>
             </>
           }
         />
-        {instancesExpanded && (
-          <InstancesListComponent workspaceId={workspace.id} />
-        )}
+        <InstancesListComponent workspaceId={workspace.id} />
       </Card>
     </Grid>
   );
@@ -355,6 +348,7 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
     useEnableInstanceMutation();
   const [deleteInstanceMutation, deleteInstanceMutationResult] =
     useDeleteInstanceMutation();
+  const [expanded, setExpanded] = useState(false);
 
   function enableInstance(enabled: boolean) {
     enableInstanceMutation({
@@ -369,13 +363,27 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
     deleteInstanceMutation({ instanceId: instance.id });
   }
 
+  const ready = instance.state === "RUNNING";
+
   return (
     <Fragment key={instance.id}>
       <Typography sx={{ gridColumnStart: 1 }}>
         {instance.name ?? instance.id}
       </Typography>
-      <Typography color="textSecondary">{instance.state}</Typography>
+      <Typography color="textSecondary" fontSize="small">
+        {instance.state}
+      </Typography>
       <Stack direction="row" spacing={0}>
+        <Tooltip title="Open MPS">
+          <IconButton
+            disabled={!ready}
+            sx={{ opacity: ready ? "100%" : "50%" }}
+            href={`http://localhost/workspace-instances/${instance.id}/port/5800/`}
+            target="_blank"
+          >
+            <img alt="MPS" src={mpsIcon} width="16px" height="16px" />
+          </IconButton>
+        </Tooltip>
         <IconButton
           disabled={enableInstanceMutationResult.isLoading}
           onClick={toggleEnabled}
@@ -391,6 +399,9 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
           onClick={deleteInstance}
         >
           <DeleteIcon />
+        </IconButton>
+        <IconButton onClick={() => setExpanded(!expanded)}>
+          {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </IconButton>
       </Stack>
     </Fragment>

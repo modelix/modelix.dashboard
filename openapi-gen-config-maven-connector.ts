@@ -1,7 +1,7 @@
 import type { ConfigFile } from '@rtk-query/codegen-openapi'
 
 const config: ConfigFile = {
-  schemaFile: "../modelix.openapi/redocly/build/bundled/maven-connector-v1.yaml",
+  schemaFile: "node_modules/@modelix/openapi-specifications/maven-connector-v1.yaml",
   apiFile: "./src/api/emptyApi.ts",
   apiImport: "emptySplitApi",
   outputFile: "./src/api/mavenConnectorApi.ts",

@@ -1,7 +1,7 @@
 import type { ConfigFile } from '@rtk-query/codegen-openapi'
 
 const config: ConfigFile = {
-  schemaFile: "../modelix.openapi/redocly/build/bundled/workspaces-v1.yaml",
+  schemaFile: "node_modules/@modelix/openapi-specifications/workspaces-v1.yaml",
   apiFile: "./src/api/emptyApi.ts",
   apiImport: "emptySplitApi",
   outputFile: "./src/api/workspacesApi.ts",
