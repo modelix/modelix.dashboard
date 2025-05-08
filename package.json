@@ -1,7 +1,7 @@
 {
-  "name": "workspaces-frontend",
+  "name": "@modelix/dashboard",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1-f157ec2.dirty",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -56,10 +56,14 @@
     "yup": "^1.6.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "19.8.0",
+    "@commitlint/config-conventional": "19.8.0",
     "@eslint/compat": "^1.2.8",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.25.1",
     "@rtk-query/codegen-openapi": "^2.0.0",
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
     "@types/node": "^22.15.2",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
@@ -77,6 +81,7 @@
     "knip": "^5.50.5",
     "prettier": "^3.5.3",
     "prettier-eslint-cli": "^8.0.1",
+    "semantic-release": "24.2.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.31.0",
