@@ -31,7 +31,7 @@ const MainCard = forwardRef(function MainCard(
     codeString,
     modal = false,
     ...others
-  },
+  }: any,
   ref
 ) {
   return (
@@ -43,9 +43,9 @@ const MainCard = forwardRef(function MainCard(
           border: border ? '1px solid' : 'none',
           borderRadius: 1,
           borderColor: 'grey.A800',
-          boxShadow: boxShadow && !border ? shadow || theme.customShadows.z1 : 'inherit',
+          boxShadow: boxShadow && !border ? shadow || (theme as any).customShadows.z1 : 'inherit',
           ':hover': {
-            boxShadow: boxShadow ? shadow || theme.customShadows.z1 : 'inherit'
+            boxShadow: boxShadow ? shadow || (theme as any).customShadows.z1 : 'inherit'
           },
           ...(modal && {
             position: 'absolute',

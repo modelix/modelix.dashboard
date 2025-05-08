@@ -1,6 +1,13 @@
 // ==============================|| PRESET THEME - DEFAULT ||============================== //
 
-export default function Default(colors) {
+import {PaletteColor} from "@mui/material/styles";
+
+export interface CustomPaletteColor extends PaletteColor {
+  lighter: string;
+  darker: string;
+}
+
+export default function Default(colors: any, presetColor: any, mode: any) {
   const { blue, red, gold, cyan, green, grey } = colors;
   const greyColors = {
     0: grey[0],

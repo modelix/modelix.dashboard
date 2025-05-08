@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 // material-ui
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -10,9 +9,12 @@ import { useGetMenuMaster } from '../../../../../api/menu';
 import * as React from "react";
 
 export interface NavItemBaseData {
-  type: 'group' | 'item',
+  type: 'group' | 'item' | 'collapse',
   id: string,
   title: string,
+  url?: string,
+  icon?: any,
+  breadcrumbs?: boolean,
 }
 
 export interface NavGroupData extends NavItemBaseData {
@@ -21,17 +23,19 @@ export interface NavGroupData extends NavItemBaseData {
 }
 
 export interface NavItemData extends NavItemBaseData {
-  type: 'item',
-  url: string,
+  type: 'item' | 'collapse',
+  url?: string,
+  route?: string,
+  disabled?: boolean,
   target?: boolean,
-  icon?: object,
-  breadcrumbs?: boolean,
+  chip?: any,
+  actions?: any
 }
 
 
-export default function NavGroup({ item }) {
+export default function NavGroup({ item }: { item: NavGroupData }) {
   const { menuMaster } = useGetMenuMaster();
-  const drawerOpen = menuMaster.isDashboardDrawerOpened;
+  const drawerOpen = menuMaster?.isDashboardDrawerOpened ?? false;
 
   const navCollapse = item.children?.map((menuItem) => {
     switch (menuItem.type) {
@@ -71,5 +75,3 @@ export default function NavGroup({ item }) {
     </List>
   );
 }
-
-NavGroup.propTypes = { item: PropTypes.object };

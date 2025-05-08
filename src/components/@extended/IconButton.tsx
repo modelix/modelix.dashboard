@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 // material-ui
@@ -9,7 +8,7 @@ import { alpha, styled } from '@mui/material/styles';
 import getColors from '../../utils/getColors';
 import getShadow from '../../utils/getShadow';
 
-function getColorStyle({ variant, theme, color }) {
+function getColorStyle({ variant, theme, color }: any) {
   const colors = getColors(theme, color);
   const { lighter, light, dark, main, contrastText } = colors;
 
@@ -90,7 +89,7 @@ function getColorStyle({ variant, theme, color }) {
 }
 
 const IconButtonStyle = styled(MuiIconButton, { shouldForwardProp: (prop) => prop !== 'variant' && prop !== 'shape' })(
-  ({ theme, color, variant }) => ({
+  ({ theme, color, variant }: any) => ({
     position: 'relative',
     '::after': {
       content: '""',
@@ -140,7 +139,7 @@ const IconButtonStyle = styled(MuiIconButton, { shouldForwardProp: (prop) => pro
         }
       },
       {
-        props: ({ variant }) => variant !== 'text',
+        props: ({ variant }: any) => variant !== 'text',
         style: {
           '&.Mui-disabled': {
             background: theme.palette.grey[200],
@@ -156,7 +155,7 @@ const IconButtonStyle = styled(MuiIconButton, { shouldForwardProp: (prop) => pro
   })
 );
 
-function IconButton({ variant = 'text', shape = 'square', children, color = 'primary', ...others }, ref) {
+function IconButton({ variant = 'text', shape = 'square', children, color = 'primary', ...others }: any, ref: any) {
   return (
     <IconButtonStyle ref={ref} disableRipple variant={variant} shape={shape} color={color} {...others}>
       {children}
@@ -167,13 +166,3 @@ function IconButton({ variant = 'text', shape = 'square', children, color = 'pri
 IconButton.displayName = 'IconButton';
 
 export default forwardRef(IconButton);
-
-getColorStyle.propTypes = { variant: PropTypes.any, theme: PropTypes.any, color: PropTypes.any };
-
-IconButton.propTypes = {
-  variant: PropTypes.string,
-  shape: PropTypes.string,
-  children: PropTypes.node,
-  color: PropTypes.string,
-  others: PropTypes.any
-};

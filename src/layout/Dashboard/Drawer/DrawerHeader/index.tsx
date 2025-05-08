@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 // project imports
 import DrawerHeaderStyled from './DrawerHeaderStyled.js';
@@ -6,9 +5,11 @@ import Logo from '../../../../components/logo';
 
 // ==============================|| DRAWER HEADER ||============================== //
 
-export default function DrawerHeader({ open }) {
+export default function DrawerHeader({ open }: { open: boolean }) {
+
   return (
     <DrawerHeaderStyled
+      // @ts-expect-error: 'open' is used internally. Was converted from JS.
       open={open}
       sx={{
         minHeight: '60px',
@@ -22,5 +23,3 @@ export default function DrawerHeader({ open }) {
     </DrawerHeaderStyled>
   );
 }
-
-DrawerHeader.propTypes = { open: PropTypes.bool };

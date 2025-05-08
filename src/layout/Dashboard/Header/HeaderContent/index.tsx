@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 
 // project imports
 import Search from './Search';
-import Profile from './Profile/index.js';
+import Profile from './Profile/index';
 import Notification from './Notification';
 import MobileSection from './MobileSection';
 

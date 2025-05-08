@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 // project imports
 import getColors from '../../utils/getColors';
 
@@ -7,10 +5,12 @@ import getColors from '../../utils/getColors';
 import BorderOutlined from '@ant-design/icons/BorderOutlined';
 import CheckSquareFilled from '@ant-design/icons/CheckSquareFilled';
 import MinusSquareFilled from '@ant-design/icons/MinusSquareFilled';
+import {Theme} from "@mui/material/styles";
+import {CustomPaletteColor} from "../theme";
 
 // ==============================|| RADIO - COLORS ||============================== //
 
-function getColorStyle({ color, theme }) {
+function getColorStyle({ color, theme }: { color: string, theme: Theme }) {
   const colors = getColors(theme, color);
   const { lighter, main, dark } = colors;
 
@@ -28,7 +28,7 @@ function getColorStyle({ color, theme }) {
   };
 }
 
-function getSizeStyle(size) {
+function getSizeStyle(size: string) {
   switch (size) {
     case 'small':
       return { fontSize: 1.15 };
@@ -42,7 +42,7 @@ function getSizeStyle(size) {
 
 // ==============================|| CHECKBOX - STYLE ||============================== //
 
-function checkboxStyle(size) {
+function checkboxStyle(size: string) {
   const sizes = getSizeStyle(size);
 
   return {
@@ -54,7 +54,7 @@ function checkboxStyle(size) {
 
 // ==============================|| OVERRIDES - CHECKBOX ||============================== //
 
-export default function Checkbox(theme) {
+export default function Checkbox(theme: Theme) {
   const { palette } = theme;
 
   return {
@@ -68,7 +68,7 @@ export default function Checkbox(theme) {
       styleOverrides: {
         root: {
           borderRadius: 0,
-          color: palette.secondary[300],
+          color: (palette.secondary as any)[300],
           '&.size-small': {
             ...checkboxStyle('small')
           },
@@ -89,5 +89,3 @@ export default function Checkbox(theme) {
     }
   };
 }
-
-getColorStyle.propTypes = { color: PropTypes.any, theme: PropTypes.any };

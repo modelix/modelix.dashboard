@@ -1,6 +1,8 @@
 // ==============================|| OVERRIDES - TABLE CELL ||============================== //
 
-export default function TableHead(theme) {
+import {Theme} from "@mui/material/styles";
+
+export default function TableHead(theme: Theme) {
   return {
     MuiTableHead: {
       styleOverrides: {

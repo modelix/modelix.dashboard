@@ -21,7 +21,7 @@ export default function SettingTab() {
   const navigate = useNavigate();
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const handleListItemClick = (event, index, route = '') => {
+  const handleListItemClick = (event: any, index: number, route = '') => {
     setSelectedIndex(index);
 
     if (route && route !== '') {

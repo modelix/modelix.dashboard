@@ -27,6 +27,7 @@ import CheckCircleOutlined from '@ant-design/icons/CheckCircleOutlined';
 import GiftOutlined from '@ant-design/icons/GiftOutlined';
 import MessageOutlined from '@ant-design/icons/MessageOutlined';
 import SettingOutlined from '@ant-design/icons/SettingOutlined';
+import {Theme} from "@mui/material/styles";
 
 // sx styles
 const avatarSX = {
@@ -50,14 +51,14 @@ const actionSX = {
 export default function Notification() {
   const downMD = useMediaQuery((theme) => theme.breakpoints.down('md'));
 
-  const anchorRef = useRef(null);
+  const anchorRef = useRef<any>(null);
   const [read, setRead] = useState(2);
   const [open, setOpen] = useState(false);
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
+  const handleClose = (event: any) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
@@ -69,7 +70,7 @@ export default function Notification() {
       <IconButton
         color="secondary"
         variant="light"
-        sx={(theme) => ({
+        sx={(theme: Theme) => ({
           color: 'text.primary',
           bgcolor: open ? 'grey.100' : 'transparent',
           ...theme.applyStyles('dark', { bgcolor: open ? 'background.default' : 'transparent' })
@@ -95,7 +96,7 @@ export default function Notification() {
       >
         {({ TransitionProps }) => (
           <Transitions type="grow" position={downMD ? 'top' : 'top-right'} in={open} {...TransitionProps}>
-            <Paper sx={(theme) => ({ boxShadow: theme.customShadows.z1, width: '100%', minWidth: 285, maxWidth: { xs: 285, md: 420 } })}>
+            <Paper sx={(theme) => ({ boxShadow: (theme as any).customShadows.z1, width: '100%', minWidth: 285, maxWidth: { xs: 285, md: 420 } })}>
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard
                   title="Notification"

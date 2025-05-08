@@ -1,12 +1,13 @@
 // project imports
 import getColors from "../../utils/getColors.ts";
 import getShadow from "../../utils/getShadow.ts";
+import {Theme} from "@mui/material/styles";
 
 // ==============================|| OVERRIDES - INPUT BORDER & SHADOWS ||============================== //
 
 
 
-function getColor({ variant, theme }) {
+function getColor({ variant, theme }: { variant: string, theme: Theme }) {
   const colors = getColors(theme, variant);
   const { light } = colors;
 
@@ -20,7 +21,7 @@ function getColor({ variant, theme }) {
 
 // ==============================|| OVERRIDES - OUTLINED INPUT ||============================== //
 
-export default function OutlinedInput(theme) {
+export default function OutlinedInput(theme: Theme) {
   return {
     MuiOutlinedInput: {
       styleOverrides: {

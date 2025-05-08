@@ -1,11 +1,12 @@
 // material-ui
-import { alpha } from '@mui/material/styles';
+import {alpha, Theme} from '@mui/material/styles';
 
 // project imports
 import getColors from '../../utils/getColors';
 import getShadow from '../../utils/getShadow';
+import {CustomPaletteColor} from "../theme";
 
-function getColorStyle({ variant, color, theme }) {
+function getColorStyle({ variant, color, theme }: { variant: string, color: string, theme: Theme }) {
   const colors = getColors(theme, color);
   const { lighter, main, dark, darker, contrastText } = colors;
 
@@ -80,7 +81,7 @@ function getColorStyle({ variant, color, theme }) {
 
 // ==============================|| OVERRIDES - BUTTON ||============================== //
 
-export default function Button(theme) {
+export default function Button(theme: Theme) {
   const primaryDashed = getColorStyle({ variant: 'dashed', color: 'primary', theme });
   const primaryShadow = getColorStyle({ variant: 'shadow', color: 'primary', theme });
 

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 
 // material-ui
 import { alpha, styled, useTheme } from '@mui/material/styles';
@@ -43,7 +42,7 @@ const SimpleBarStyle = styled(SimpleBar)(({ theme }) => ({
 
 // ==============================|| SIMPLE SCROLL BAR ||============================== //
 
-export default function SimpleBarScroll({ children, sx, ...other }) {
+export default function SimpleBarScroll({ children, sx, ...other }: any) {
   const theme = useTheme();
 
   return (
@@ -61,5 +60,3 @@ export default function SimpleBarScroll({ children, sx, ...other }) {
     </>
   );
 }
-
-SimpleBarScroll.propTypes = { children: PropTypes.any, sx: PropTypes.any, other: PropTypes.any };

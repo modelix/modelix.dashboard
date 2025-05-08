@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -6,7 +5,7 @@ import Box from '@mui/material/Box';
 // project imports
 import getColors from '../../utils/getColors';
 
-export default function Dot({ color, size, variant, sx }) {
+export default function Dot({ color, size, variant, sx }: { color?: string; size?: number; variant?: string; sx?: any }) {
   const theme = useTheme();
   const colors = getColors(theme, color || 'primary');
   const { main } = colors;
@@ -23,5 +22,3 @@ export default function Dot({ color, size, variant, sx }) {
     />
   );
 }
-
-Dot.propTypes = { color: PropTypes.any, size: PropTypes.number, variant: PropTypes.string, sx: PropTypes.any };

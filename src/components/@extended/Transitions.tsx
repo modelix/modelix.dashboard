@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 
 // material-ui
@@ -9,7 +8,7 @@ import Slide from '@mui/material/Slide';
 import Zoom from '@mui/material/Zoom';
 import Box from '@mui/material/Box';
 
-function transitions({ children, position = 'top-left', type = 'grow', direction = 'up', ...others }, ref) {
+function transitions({ children, position = 'top-left', type = 'grow', direction = 'up', ...others }: any, ref: any) {
   let positionSX = {
     transformOrigin: '0 0 0'
   };
@@ -107,15 +106,7 @@ function transitions({ children, position = 'top-left', type = 'grow', direction
 
 export default forwardRef(transitions);
 
-function popupTransition(props, ref) {
+function popupTransition(props: any, ref: any) {
   return <Zoom ref={ref} timeout={200} {...props} />;
 }
 export const PopupTransition = forwardRef(popupTransition);
-
-transitions.propTypes = {
-  children: PropTypes.node,
-  position: PropTypes.string,
-  type: PropTypes.string,
-  direction: PropTypes.oneOf(['up', 'right', 'left', 'down']),
-  others: PropTypes.any
-};

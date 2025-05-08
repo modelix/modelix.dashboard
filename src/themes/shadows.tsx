@@ -1,9 +1,9 @@
 // material-ui
-import { alpha } from '@mui/material/styles';
+import {alpha, Theme} from '@mui/material/styles';
 
 // ==============================|| DEFAULT THEME - CUSTOM SHADOWS ||============================== //
 
-export default function CustomShadows(theme) {
+export default function CustomShadows(theme: Theme) {
   return {
     // z1: `0px 2px 8px rgba(0, 0, 0, 0.15)`,
     button: `0 2px #0000000b`,

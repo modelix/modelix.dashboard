@@ -1,7 +1,6 @@
 import com.github.gradle.node.npm.task.NpmTask
-import org.gradle.kotlin.dsl.assign
+import com.github.gradle.node.pnpm.task.PnpmTask
 import org.gradle.kotlin.dsl.register
-
 
 plugins {
     base
@@ -70,10 +69,26 @@ val updateVersionTask = tasks.register<NpmTask>("updatePackageVersion") {
     ))
 }
 
+val generateWorkspacesApi by tasks.registering(PnpmTask::class) {
+    dependsOn(tasks.pnpmInstall)
+    pnpmCommand = listOf("run", "generate-openapi-workspaces")
+}
+val generateMavenConnectorApi by tasks.registering(PnpmTask::class) {
+    dependsOn(tasks.pnpmInstall)
+    pnpmCommand = listOf("run", "generate-openapi-maven-connector")
+}
+
+val pnpmRunBuild = tasks.register<PnpmTask>("pnpm_run_build") {
+    dependsOn(generateWorkspacesApi)
+    dependsOn(generateMavenConnectorApi)
+    pnpmCommand = listOf("run", "build")
+}
+
 val npmPackTask =
     tasks.register<NpmTask>("npmPack") {
         group = "build"
         dependsOn(updateVersionTask)
+        dependsOn(pnpmRunBuild)
 
         workingDir.set(layout.projectDirectory.asFile)
         npmCommand = listOf("pack")
@@ -100,6 +115,24 @@ val npmPublishTask =
             ),
         )
     }
+
+val zipDist = tasks.register<Zip>("zipDist") {
+    group = "build"
+    dependsOn(pnpmRunBuild)
+    from(layout.projectDirectory.dir("dist"))
+    archiveBaseName = "dist"
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("dashboardZip") {
+            artifactId = "dashboard-spa"
+            artifact(zipDist) {
+                extension = "zip"
+            }
+        }
+    }
+}
 
 tasks.assemble {
     dependsOn(npmPackTask)

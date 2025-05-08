@@ -6,22 +6,6 @@ const pages: NavGroupData = {
   title: 'Administration',
   type: 'group',
   children: [
-    // {
-    //   id: 'login1',
-    //   title: 'Login',
-    //   type: 'item',
-    //   url: '/login',
-    //   icon: LoginOutlined,
-    //   target: true
-    // },
-    // {
-    //   id: 'register1',
-    //   title: 'Register',
-    //   type: 'item',
-    //   url: '/register',
-    //   icon: ProfileOutlined,
-    //   target: true
-    // },
     {
       id: 'user-management',
       title: 'Users',

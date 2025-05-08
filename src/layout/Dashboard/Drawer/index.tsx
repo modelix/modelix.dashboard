@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -17,7 +16,7 @@ import { handlerDrawerOpen, useGetMenuMaster } from '../../../api/menu';
 
 export default function MainDrawer() {
   const { menuMaster } = useGetMenuMaster();
-  const drawerOpen = menuMaster.isDashboardDrawerOpened;
+  const drawerOpen = menuMaster?.isDashboardDrawerOpened ?? false;
   const downLG = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
 
@@ -56,5 +55,3 @@ export default function MainDrawer() {
     </Box>
   );
 }
-
-MainDrawer.propTypes = { window: PropTypes.func };
