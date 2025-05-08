@@ -1,6 +1,5 @@
 {
   "name": "@modelix/dashboard",
-  "private": true,
   "version": "0.0.1-f157ec2.dirty",
   "type": "module",
   "scripts": {
