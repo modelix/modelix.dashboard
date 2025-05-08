@@ -18,11 +18,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
-import { MavenRepository } from "@modelix/api-client-ts-axios";
 import {
-  MavenArtifact, useDeleteMavenArtifactMutation,
+  MavenRepository,
   useDeleteMavenRepositoryMutation,
-  useGetMavenConnectorConfigQuery, useUpdateMavenArtifactMutation,
+  useGetMavenConnectorConfigQuery,
   useUpdateMavenRepositoryMutation,
 } from "../../api/mavenConnectorApi.ts";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
@@ -84,31 +83,37 @@ function MavenConnectivityPageWhenAuthenticated() {
   );
 }
 
-function RepositoriesTable({repositories}: { repositories: MavenRepository[] }) {
-  return <Paper>
-    <Toolbar sx={{ pl: 3, pr: 3 }}>
-      <Typography sx={{ flex: "1 1 100%" }} component="div" variant="h5">
-        Repositories
-      </Typography>
-    </Toolbar>
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>URL</TableCell>
-            <TableCell></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {repositories?.map((repo, index) => {
-            return <RepositoryRow key={repo.id} repo={repo} />;
-          })}
-          <NewRepositoryRow />
-        </TableBody>
-      </Table>
-    </TableContainer>
-  </Paper>
+function RepositoriesTable({
+  repositories,
+}: {
+  repositories: MavenRepository[];
+}) {
+  return (
+    <Paper>
+      <Toolbar sx={{ pl: 3, pr: 3 }}>
+        <Typography sx={{ flex: "1 1 100%" }} component="div" variant="h5">
+          Repositories
+        </Typography>
+      </Toolbar>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>URL</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {repositories?.map((repo, index) => {
+              return <RepositoryRow key={repo.id} repo={repo} />;
+            })}
+            <NewRepositoryRow />
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
+  );
 }
 
 function NewRepositoryRow() {
