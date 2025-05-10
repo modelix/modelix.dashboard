@@ -7,6 +7,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "generate-openapi-git-connector": "npx @rtk-query/codegen-openapi openapi-gen-config-git-connector.ts",
     "generate-openapi-maven-connector": "npx @rtk-query/codegen-openapi openapi-gen-config-maven-connector.ts",
     "generate-openapi-workspaces": "npx @rtk-query/codegen-openapi openapi-gen-config-workspaces.ts"
   },

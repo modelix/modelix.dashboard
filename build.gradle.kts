@@ -77,10 +77,19 @@ val generateMavenConnectorApi by tasks.registering(PnpmTask::class) {
     dependsOn(tasks.pnpmInstall)
     pnpmCommand = listOf("run", "generate-openapi-maven-connector")
 }
+val generateGitConnectorApi by tasks.registering(PnpmTask::class) {
+    dependsOn(tasks.pnpmInstall)
+    pnpmCommand = listOf("run", "generate-openapi-git-connector")
+}
 
-val pnpmRunBuild = tasks.register<PnpmTask>("pnpm_run_build") {
+val generateApis by tasks.registering {
     dependsOn(generateWorkspacesApi)
     dependsOn(generateMavenConnectorApi)
+    dependsOn(generateGitConnectorApi)
+}
+
+val pnpmRunBuild = tasks.register<PnpmTask>("pnpm_run_build") {
+    dependsOn(generateApis)
     pnpmCommand = listOf("run", "build")
 }
 
