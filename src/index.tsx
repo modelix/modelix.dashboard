@@ -33,7 +33,7 @@ import AuthTokenManager from "./components/AuthTokenManager.ts";
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
-const keycloakUrl = `https://${window.location.host}/realms/modelix/`
+const keycloakUrl = `https://${window.location.hostname}/realms/modelix/`
 const appUrl = `${window.location.protocol}//${window.location.host}${import.meta.env.BASE_URL}`
 
 root.render(
