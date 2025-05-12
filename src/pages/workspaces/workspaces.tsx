@@ -1,10 +1,10 @@
 import {
-  GitRepository,
   MavenRepository,
   useCreateInstanceMutation,
   useDeleteInstanceMutation,
   useDeleteWorkspaceMutation,
   useEnableInstanceMutation,
+  useGetWorkspaceQuery,
   useListInstancesQuery,
   useListWorkspacesQuery,
   useUpdateWorkspaceMutation,
@@ -31,7 +31,6 @@ import Collapse from "@mui/material/Collapse";
 import MenuItem from "@mui/material/MenuItem";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Divider from "@mui/material/Divider";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import ErrorIcon from "@mui/icons-material/Error";
 import Tooltip from "@mui/material/Tooltip";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -39,6 +38,10 @@ import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
 import { useAuth } from "react-oidc-context";
 import Stack from "@mui/material/Stack";
 import mpsIcon from "../../assets/images/mps-logo.png";
+import { useNavigate } from "react-router";
+import OpenInFullIcon from "@mui/icons-material/OpenInFull";
+import WorkspaceLaunchButton from "../connectivity/git/WorkspaceLaunchButton.tsx";
+import {useListGitRepositoriesQuery} from "../../api/gitConnectorApi.ts";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -58,6 +61,19 @@ export default function WorkspacesList() {
   );
 }
 
+export function SingleWorkspace({ workspaceId }: { workspaceId: string }) {
+  const workspaceQuery = useGetWorkspaceQuery({ workspaceId: workspaceId });
+  if (workspaceQuery.isLoading) return "Loading...";
+  if (workspaceQuery.isError) {
+    return "An error has occurred: " + JSON.stringify(workspaceQuery.error);
+  }
+  return (
+      <Grid container spacing={2} columns={{ xs: 4, sm: 8, lg: 12 }}>
+        <WorkspaceCard workspace={workspaceQuery.data!} forceExpanded={true} />
+      </Grid>
+  );
+}
+
 function WorkspacesTable({ workspaces }: { workspaces: WorkspaceConfig[] }) {
   return (
     <Grid container spacing={2} columns={{ xs: 4, sm: 8, lg: 12 }}>
@@ -68,15 +84,23 @@ function WorkspacesTable({ workspaces }: { workspaces: WorkspaceConfig[] }) {
   );
 }
 
-function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
+function WorkspaceCard({
+  workspace,
+  forceExpanded,
+}: {
+  workspace: WorkspaceConfig;
+  forceExpanded?: boolean;
+}) {
   const auth = useAuth();
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(forceExpanded ?? false);
   const [modifiedData, setModifiedData] = useState<WorkspaceConfig | null>(
     null,
   );
   const [sendUpdate, mutationResult] = useUpdateWorkspaceMutation();
   const [deleteWorkspace, deletionResult] = useDeleteWorkspaceMutation();
   const [newInstanceMutation, newInstanceResult] = useCreateInstanceMutation();
+  const gitRepositoriesQuery = useListGitRepositoriesQuery({});
+  const navigate = useNavigate();
   const editingMode = modifiedData !== null;
   const dataToShow = modifiedData ?? workspace;
 
@@ -113,6 +137,15 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
           title={workspace.name}
           action={
             <>
+              {!forceExpanded && (
+                <IconButton
+                  onClick={() =>
+                    navigate(`/workspaces/workspaces/${workspace.id}`)
+                  }
+                >
+                  <OpenInFullIcon />
+                </IconButton>
+              )}
               {mutationResult.isLoading ? (
                 <IconButton disabled>
                   <HourglassEmptyIcon />
@@ -126,6 +159,11 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                   <EditIcon />
                 </IconButton>
               )}
+              {editingMode && (
+                <IconButton onClick={() => setModifiedData(null)}>
+                  <CancelIcon />
+                </IconButton>
+              )}
               {deletionResult.isLoading ? (
                 <IconButton disabled>
                   <HourglassEmptyIcon />
@@ -135,11 +173,8 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                   <DeleteIcon />
                 </IconButton>
               )}
-              {editingMode ? (
-                <IconButton onClick={() => setModifiedData(null)}>
-                  <CancelIcon />
-                </IconButton>
-              ) : (
+
+              {!forceExpanded && !editingMode && (
                 <IconButton onClick={() => setExpanded(!expanded)}>
                   {expanded || editingMode ? (
                     <ExpandLessIcon />
@@ -169,12 +204,12 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
               MPS Version
             </Typography>
             <Typography>{workspace.mpsVersion}</Typography>
-            {workspace.gitRepositories.map((repo) => (
-              <Fragment key={repo.url}>
+            {workspace.gitRepositoryIds?.map((repoId) => (
+              <Fragment key={repoId}>
                 <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                   Git
                 </Typography>
-                <Typography>{repo.url}</Typography>
+                <Typography>{gitRepositoriesQuery.data?.repositories?.find((repo) => repo.id === repoId)?.name}</Typography>
               </Fragment>
             ))}
           </Box>
@@ -238,6 +273,8 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                   })
                 }
               />
+              {/*
+
               <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                 Git Repositories
               </Typography>
@@ -247,19 +284,21 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
                   gridColumnEnd: "end",
                 }}
               >
-                <EditableList<GitRepository>
-                  items={dataToShow.gitRepositories}
+                <EditableList<string>
+                  items={dataToShow.gitRepositoryIds}
                   newItemTemplate={{ url: "" }}
                   onListChange={(newList) =>
                     setModifiedData({
                       ...dataToShow,
-                      gitRepositories: newList,
+                      gitRepositoryIds: newList,
                     })
                   }
                   updateItem={(item, newValue) => ({ ...item, url: newValue })}
                   itemText={(item) => item.url}
                 />
               </Box>
+
+              */}
               <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                 Maven Repositories
               </Typography>
@@ -291,12 +330,7 @@ function WorkspaceCard({ workspace }: { workspace: WorkspaceConfig }) {
           slotProps={{ title: { variant: "h6" } }}
           action={
             <>
-              <IconButton
-                disabled={newInstanceResult.isLoading}
-                onClick={launchInstance}
-              >
-                <RocketLaunchIcon />
-              </IconButton>
+              <WorkspaceLaunchButton initialWorkspaceId={workspace.id} />
             </>
           }
         />

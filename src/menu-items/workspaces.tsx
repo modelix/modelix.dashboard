@@ -8,22 +8,22 @@ const workspaces: NavGroupData = {
   title: 'Workspaces',
   type: 'group',
   children: [
-    {
-      id: 'mps-assets',
-      title: 'MPS Assets',
-      type: 'item',
-      route: '/workspaces/mps-assets',
-      icon: () => <img alt="MPS" src={mpsIcon} width="16px" height="16px"/>,
-      breadcrumbs: false
-    },
-    {
-      id: 'workspace-templates',
-      title: 'Templates',
-      type: 'item',
-      route: '/workspaces/templates',
-      icon: FileOutlined,
-      breadcrumbs: false
-    },
+    // {
+    //   id: 'mps-assets',
+    //   title: 'MPS Assets',
+    //   type: 'item',
+    //   route: '/workspaces/mps-assets',
+    //   icon: () => <img alt="MPS" src={mpsIcon} width="16px" height="16px"/>,
+    //   breadcrumbs: false
+    // },
+    // {
+    //   id: 'workspace-templates',
+    //   title: 'Templates',
+    //   type: 'item',
+    //   route: '/workspaces/templates',
+    //   icon: FileOutlined,
+    //   breadcrumbs: false
+    // },
     {
       id: 'workspaces',
       title: 'Workspaces',
@@ -32,14 +32,14 @@ const workspaces: NavGroupData = {
       icon: FileOutlined,
       breadcrumbs: false
     },
-    {
-      id: 'workspaces-instances',
-      title: 'Instances',
-      type: 'item',
-      route: '/workspaces/instances',
-      icon: LaptopOutlined,
-      breadcrumbs: false
-    },
+    // {
+    //   id: 'workspaces-instances',
+    //   title: 'Instances',
+    //   type: 'item',
+    //   route: '/workspaces/instances',
+    //   icon: LaptopOutlined,
+    //   breadcrumbs: false
+    // },
   ]
 };
 
