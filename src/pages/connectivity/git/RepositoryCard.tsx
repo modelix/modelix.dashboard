@@ -3,7 +3,7 @@ import {
   GitRepositoryConfig,
   useCreateGitRepositoryMutation,
   useDeleteGitRepositoryMutation,
-  useTriggerGitFetchMutation,
+  useUpdateBranchesMutation,
   useUpdateGitRepositoryMutation,
 } from "../../../api/gitConnectorApi.ts";
 import {Fragment, useState} from "react";
@@ -18,7 +18,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
+import {Accordion, AccordionActions, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -27,6 +27,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import LockOutlineIcon from "@mui/icons-material/LockOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {BranchesTable} from "./BranchesTable.tsx";
+import {DraftsTable} from "./DraftsTable.tsx";
 
 const newRepositoryTemplate: GitRepositoryConfig = {
   id: "New Repository",
@@ -37,7 +38,7 @@ export function RepositoryComponent({repo}: { repo: GitRepositoryConfig | null }
   const [createRepoMutation, createRepoMutationStatus] = useCreateGitRepositoryMutation();
   const [updateRepoMutation, updateRepoMutationStatus] = useUpdateGitRepositoryMutation();
   const [deleteRepoMutation, deleteRepoMutationStatus] = useDeleteGitRepositoryMutation();
-  const [triggerGitFetchMutation, triggerGitFetchMutationStatus] = useTriggerGitFetchMutation();
+  const [updateBranchesMutation, updateBranchesMutationStatus] = useUpdateBranchesMutation();
 
   const dataToShow = modifiedData ?? repo ?? newRepositoryTemplate;
   const isNewRepo = repo === null;
@@ -62,9 +63,9 @@ export function RepositoryComponent({repo}: { repo: GitRepositoryConfig | null }
     }
   }
 
-  function triggerGitFetch() {
+  function updateBranches() {
     if (repo !== null) {
-      triggerGitFetchMutation({repositoryId: repo.id});
+      updateBranchesMutation({repositoryId: repo.id});
     }
   }
 
@@ -87,11 +88,6 @@ export function RepositoryComponent({repo}: { repo: GitRepositoryConfig | null }
                       >
                         Save
                       </Button>
-                  )}
-                  {(repo?.remotes?.length ?? 0) > 0 && (
-                      <IconButton onClick={triggerGitFetch}>
-                        <SyncIcon/>
-                      </IconButton>
                   )}
                   {repo !== null && (
                       <IconButton onClick={handleDelete}>
@@ -269,14 +265,29 @@ export function RepositoryComponent({repo}: { repo: GitRepositoryConfig | null }
               </AccordionDetails>
             </Accordion>
             {repo && (
-                <Accordion slotProps={{transition: {unmountOnExit: true}}}>
-                  <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
-                    <Typography>Branches</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <BranchesTable repositoryId={repo?.id}/>
-                  </AccordionDetails>
-                </Accordion>
+                <>
+                  <Accordion slotProps={{transition: {unmountOnExit: true}}}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                      <Typography>Branches</Typography>
+                    </AccordionSummary>
+                    {(repo?.remotes?.length ?? 0) > 0 && (
+                        <AccordionActions>
+                          <IconButton disabled={updateBranchesMutationStatus.isLoading} onClick={updateBranches}>
+                            <SyncIcon/>
+                          </IconButton>
+                        </AccordionActions>
+                    )}
+                    <AccordionDetails>
+                      <BranchesTable repositoryId={repo?.id}/>
+                    </AccordionDetails>
+                  </Accordion>
+                  <Accordion slotProps={{transition: {unmountOnExit: true}}}>
+                    <AccordionSummary><Typography>Drafts</Typography></AccordionSummary>
+                    <AccordionDetails>
+                      <DraftsTable repositoryId={repo?.id}/>
+                    </AccordionDetails>
+                  </Accordion>
+                </>
             )}
           </CardContent>
         </Card>
