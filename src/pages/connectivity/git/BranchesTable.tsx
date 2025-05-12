@@ -10,6 +10,9 @@ import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import {GitBranchStatusData, useGetGitRepositoryStatusQuery} from "../../../api/gitConnectorApi.ts";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import Tooltip from "@mui/material/Tooltip";
+import WorkspaceLaunchButton from "./WorkspaceLaunchButton.tsx";
 
 export function BranchesTable({repositoryId}: { repositoryId: string }) {
   const statusQuery = useGetGitRepositoryStatusQuery(
@@ -28,18 +31,19 @@ export function BranchesTable({repositoryId}: { repositoryId: string }) {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>Hash</TableCell>
+            <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {(branchTree.children ?? []).map((child) => (
-              <BranchGroup key={child.namePart} node={child}/>
+              <BranchGroup key={child.namePart} repositoryId={repositoryId} node={child}/>
           ))}
         </TableBody>
       </Table>
   );
 }
 
-function BranchGroup({node}: { node: BranchNode }) {
+function BranchGroup({repositoryId, node}: { repositoryId: string, node: BranchNode }) {
   const [expanded, setExpanded] = useState<boolean>(false);
   return (
       <>
@@ -57,20 +61,19 @@ function BranchGroup({node}: { node: BranchNode }) {
             </Box>
           </TableCell>
           <TableCell>{node.branchData?.gitCommitHash?.substring(0, 7)}</TableCell>
+          <TableCell align="right">
+            {node.branchData &&
+                <WorkspaceLaunchButton
+                    initialGitRepositoryId={repositoryId}
+                    initialGitBranchName={node.branchData.name}
+                />
+            }
+          </TableCell>
         </TableRow>
         {expanded &&
             node.children.map((child, index) => (
-                <BranchGroup key={node.namePart} node={child}/>
+                <BranchGroup key={node.namePart} repositoryId={repositoryId} node={child}/>
             ))}
       </>
-  );
-}
-
-function BranchRow({branch}: { branch: GitBranchStatusData }) {
-  return (
-      <TableRow key={branch.name}>
-        <TableCell>{branch.name}</TableCell>
-        <TableCell>{branch.gitCommitHash?.substring(0, 7)}</TableCell>
-      </TableRow>
   );
 }

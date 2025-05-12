@@ -8,11 +8,8 @@ import Grid from "@mui/material/Grid";
 import { RepositoryComponent } from "./RepositoryCard.tsx";
 
 export default function GitConnectivityPage() {
-  const repositoriesQuery = useListGitRepositoriesQuery(undefined, {
-    pollingInterval: 3000,
-  });
-  const [newRepositoryMutation, newRepositoryMutationStatus] =
-    useCreateGitRepositoryMutation();
+  const repositoriesQuery = useListGitRepositoriesQuery({}, {pollingInterval: 3000});
+  const [newRepositoryMutation, newRepositoryMutationStatus] = useCreateGitRepositoryMutation();
   const newRepo = useState<GitRepositoryConfig | null>(null);
 
   if (repositoriesQuery.isLoading) return "Loading...";
