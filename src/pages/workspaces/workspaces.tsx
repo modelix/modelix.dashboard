@@ -1,5 +1,4 @@
 import {
-  GitRepository,
   MavenRepository,
   useCreateInstanceMutation,
   useDeleteInstanceMutation,
@@ -32,7 +31,6 @@ import Collapse from "@mui/material/Collapse";
 import MenuItem from "@mui/material/MenuItem";
 import CancelIcon from "@mui/icons-material/Cancel";
 import Divider from "@mui/material/Divider";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import ErrorIcon from "@mui/icons-material/Error";
 import Tooltip from "@mui/material/Tooltip";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
@@ -43,6 +41,7 @@ import mpsIcon from "../../assets/images/mps-logo.png";
 import { useNavigate } from "react-router";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import WorkspaceLaunchButton from "../connectivity/git/WorkspaceLaunchButton.tsx";
+import {useListGitRepositoriesQuery} from "../../api/gitConnectorApi.ts";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -100,6 +99,7 @@ function WorkspaceCard({
   const [sendUpdate, mutationResult] = useUpdateWorkspaceMutation();
   const [deleteWorkspace, deletionResult] = useDeleteWorkspaceMutation();
   const [newInstanceMutation, newInstanceResult] = useCreateInstanceMutation();
+  const gitRepositoriesQuery = useListGitRepositoriesQuery({});
   const navigate = useNavigate();
   const editingMode = modifiedData !== null;
   const dataToShow = modifiedData ?? workspace;
@@ -204,12 +204,12 @@ function WorkspaceCard({
               MPS Version
             </Typography>
             <Typography>{workspace.mpsVersion}</Typography>
-            {workspace.gitRepositories.map((repo) => (
-              <Fragment key={repo.url}>
+            {workspace.gitRepositoryIds?.map((repoId) => (
+              <Fragment key={repoId}>
                 <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                   Git
                 </Typography>
-                <Typography>{repo.url}</Typography>
+                <Typography>{gitRepositoriesQuery.data?.repositories?.find((repo) => repo.id === repoId)?.name}</Typography>
               </Fragment>
             ))}
           </Box>
@@ -273,6 +273,8 @@ function WorkspaceCard({
                   })
                 }
               />
+              {/*
+
               <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                 Git Repositories
               </Typography>
@@ -282,19 +284,21 @@ function WorkspaceCard({
                   gridColumnEnd: "end",
                 }}
               >
-                <EditableList<GitRepository>
-                  items={dataToShow.gitRepositories}
+                <EditableList<string>
+                  items={dataToShow.gitRepositoryIds}
                   newItemTemplate={{ url: "" }}
                   onListChange={(newList) =>
                     setModifiedData({
                       ...dataToShow,
-                      gitRepositories: newList,
+                      gitRepositoryIds: newList,
                     })
                   }
                   updateItem={(item, newValue) => ({ ...item, url: newValue })}
                   itemText={(item) => item.url}
                 />
               </Box>
+
+              */}
               <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                 Maven Repositories
               </Typography>

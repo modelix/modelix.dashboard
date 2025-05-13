@@ -16,7 +16,7 @@ import {
   GitRepositoryConfig,
   useCreateDraftInRepositoryMutation,
   useGetGitRepositoryQuery,
-  useGetGitRepositoryStatusQuery,
+  useGetGitRepositoryStatusQuery, useListBranchesQuery,
   useListDraftsInRepositoryQuery,
   useListGitRepositoriesQuery,
 } from "../../../api/gitConnectorApi.ts";
@@ -86,6 +86,7 @@ function WorkspaceLaunchDialogContent(props: {
   const workspaceQuery = useGetWorkspaceQuery({
     workspaceId: workspaceId ?? "",
   });
+  const gitBranchQuery = useListBranchesQuery({repositoryId: repositoryId ?? ""})
 
   async function handleLaunch() {
     const newOrChosenDraftId =
@@ -97,6 +98,7 @@ function WorkspaceLaunchDialogContent(props: {
             id: "",
             gitRepositoryId: repositoryId!,
             gitBranchName: gitBranchName!,
+            baseGitCommit: "",
             modelixBranchName: "",
           },
         })
@@ -300,10 +302,9 @@ function WorkspaceChooser(props: {
   const [createWorkspaceMutation, createWorkspaceMutationResult] =
     useCreateWorkspaceMutation();
   const navigate = useNavigate();
-  const gitUrlsInRepo = repositoryQuery.data?.remotes?.map((r) => r.url) ?? [];
   const filteredWorkspaces =
     workspacesQuery.data?.workspaces?.filter((w) =>
-      w.gitRepositories.some((r) => gitUrlsInRepo.includes(r.url)),
+      (w.gitRepositoryIds ?? []).includes(props.repositoryId),
     ) ?? [];
 
   const selectedWorkspace = filteredWorkspaces.find(
@@ -321,9 +322,7 @@ function WorkspaceChooser(props: {
               name: repositoryQuery?.data?.name ?? "",
               mpsVersion: "",
               memoryLimit: "2Gi",
-              gitRepositories: [
-                { url: repositoryQuery?.data?.remotes?.at(0)?.url ?? "" },
-              ],
+              gitRepositoryIds: [props.repositoryId],
             },
           });
           const id = newWorkspace?.data?.id;
