@@ -1,4 +1,5 @@
 import {
+  MavenArtifact,
   MavenRepository,
   useCreateInstanceMutation,
   useDeleteInstanceMutation,
@@ -42,6 +43,7 @@ import { useNavigate } from "react-router";
 import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import WorkspaceLaunchButton from "../connectivity/git/WorkspaceLaunchButton.tsx";
 import {useListGitRepositoriesQuery} from "../../api/gitConnectorApi.ts";
+import ListEditor from "../../components/ListEditor.tsx";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -321,6 +323,43 @@ function WorkspaceCard({
                   itemText={(item) => item.url}
                 />
               </Box>
+              <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
+                Maven Artifacts
+              </Typography>
+              <Box
+                sx={{
+                  gridColumnStart: 2,
+                  gridColumnEnd: "end",
+                  display: "grid",
+                  gridTemplateColumns: "1fr max-content 1fr max-content 1fr max-content",
+                  columnGap: 1,
+                  rowGap: 1,
+                  alignItems: "center",
+                }}
+              >
+                <ListEditor<MavenArtifact>
+                  initialData={dataToShow.mavenArtifacts ?? []}
+                  onChange={(newList) =>
+                      setModifiedData({
+                        ...dataToShow,
+                        mavenArtifacts: newList,
+                      })
+                  }
+                  itemComponent={(item, index, isNewItem, deleteItem, updateItem) =>
+                      <Fragment key={index}>
+                        <TextField label="Group" value={item.groupId} onChange={(e) => updateItem({...item, groupId: e.target.value})} />
+                        <Typography>:</Typography>
+                        <TextField label="Artifact" value={item.artifactId} onChange={(e) => updateItem({...item, artifactId: e.target.value})} />
+                        <Typography>:</Typography>
+                        <TextField label="Version" value={item.version} onChange={(e) => updateItem({...item, version: e.target.value})} />
+                        <Stack direction="row">
+                          { !isNewItem && <IconButton onClick={deleteItem}><DeleteIcon/></IconButton> }
+                        </Stack>
+                      </Fragment>
+                  }
+                  newItemTemplate={{ groupId: '', artifactId: '', version: '' }}
+                />
+              </Box>
             </Box>
           </CardContent>
         </Collapse>
@@ -330,7 +369,7 @@ function WorkspaceCard({
           slotProps={{ title: { variant: "h6" } }}
           action={
             <>
-              <WorkspaceLaunchButton initialWorkspaceId={workspace.id} />
+              <WorkspaceLaunchButton initialWorkspaceId={workspace.id} initialGitRepositoryId={workspace.gitRepositoryIds?.at(0)} />
             </>
           }
         />
