@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {
   Autocomplete,
   Dialog,
@@ -37,9 +37,11 @@ export default function WorkspaceLaunchButton(props: {
   initialWorkspaceId?: string;
 }) {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const dialogCloseCallback = useCallback(() => setDialogOpen(false), [])
 
   const handleButtonClick = () => {
     setDialogOpen(true);
+
   };
 
   return (
@@ -50,13 +52,14 @@ export default function WorkspaceLaunchButton(props: {
         </IconButton>
       </Tooltip>
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <DialogTitle>
-          <Typography variant="h4">Launch Workspace</Typography>
+        <DialogTitle variant="h4">
+          Launch Workspace
         </DialogTitle>
         <WorkspaceLaunchDialogContent
           initialGitBranchName={props.initialGitBranchName}
           initialGitRepositoryId={props.initialGitRepositoryId}
           initialWorkspaceId={props.initialWorkspaceId}
+          closeDialog={dialogCloseCallback}
         />
       </Dialog>
     </>
@@ -67,6 +70,7 @@ function WorkspaceLaunchDialogContent(props: {
   initialGitRepositoryId?: string;
   initialGitBranchName?: string;
   initialWorkspaceId?: string;
+  closeDialog: () => void;
 }) {
   const [repositoryId, setRepositoryId] = useState<string | undefined>(
     props.initialGitRepositoryId,
@@ -117,6 +121,7 @@ function WorkspaceLaunchDialogContent(props: {
         },
       })
     )?.data?.id;
+    props.closeDialog();
     navigate("/workspaces/workspaces/" + workspaceId);
   }
 
@@ -198,7 +203,7 @@ function RepositoryChooser(props: {
   onChange: (newId?: string) => void;
 }) {
   const repositoryListQuery = useListGitRepositoriesQuery({});
-  const selectedRepository = repositoryListQuery.data?.repositories.find(
+  const selectedRepository = repositoryListQuery.data?.repositories?.find(
     (r) => r.id === props.repositoryId,
   );
   const sortedOptions = repositoryListQuery.data?.repositories?.slice() ?? [];
@@ -206,7 +211,7 @@ function RepositoryChooser(props: {
   return (
     <Autocomplete<GitRepositoryConfig>
       sx={{ minWidth: 300 }}
-      value={selectedRepository}
+      value={selectedRepository ?? null}
       onChange={(e, newValue) => props.onChange(newValue?.id)}
       options={sortedOptions}
       isOptionEqualToValue={(option, value) => option.id === value.id}
@@ -235,7 +240,7 @@ function GitBranchChooser(props: {
   return (
     <Autocomplete<string>
       sx={{ minWidth: 500 }}
-      value={selectedBranch}
+      value={selectedBranch ?? null}
       onChange={(e, newValue) => props.onChange(newValue ?? undefined)}
       options={sortedOptions}
       renderInput={(params) => (
@@ -274,7 +279,7 @@ function DraftChooser(props: {
   return (
     <Autocomplete<DraftConfig>
       sx={{ minWidth: 300 }}
-      value={selectedDraft}
+      value={selectedDraft ?? null}
       onChange={(e, newValue) => props.onChange(newValue?.id ?? undefined)}
       options={filteredDrafts}
       getOptionLabel={(option) => option.name ?? option.id}
@@ -338,7 +343,7 @@ function WorkspaceChooser(props: {
     return (
       <Autocomplete<WorkspaceConfig>
         sx={{ minWidth: 300 }}
-        value={selectedWorkspace}
+        value={selectedWorkspace ?? null}
         onChange={(e, newValue) => props.onChange(newValue?.id ?? undefined)}
         options={filteredWorkspaces}
         getOptionLabel={(option) => option.name ?? option.id}

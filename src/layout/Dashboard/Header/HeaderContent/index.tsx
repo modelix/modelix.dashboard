@@ -29,7 +29,7 @@ export default function HeaderContent() {
             href="https://github.com/modelix"
             target="_blank"
             color="secondary"
-            title="Modelix on Docker GitHub"
+            title="Modelix on GitHub"
             sx={(theme) => ({
               color: 'text.primary',
               bgcolor: 'transparent',
