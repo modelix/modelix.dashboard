@@ -63,7 +63,7 @@ export function RepositoryComponent({repo}: { repo: GitRepositoryConfig | null }
     }
   }
 
-  function updateBranches() {
+  function refreshBranches() {
     if (repo !== null) {
       updateBranchesMutation({repositoryId: repo.id});
     }
@@ -272,7 +272,7 @@ export function RepositoryComponent({repo}: { repo: GitRepositoryConfig | null }
                     </AccordionSummary>
                     {(repo?.remotes?.length ?? 0) > 0 && (
                         <AccordionActions>
-                          <IconButton disabled={updateBranchesMutationStatus.isLoading} onClick={updateBranches}>
+                          <IconButton disabled={updateBranchesMutationStatus.isLoading} onClick={refreshBranches}>
                             <SyncIcon/>
                           </IconButton>
                         </AccordionActions>

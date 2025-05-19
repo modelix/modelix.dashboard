@@ -188,7 +188,7 @@ function WorkspaceLaunchDialogContent(props: {
         <Button
           variant="contained"
           startIcon={<RocketLaunchIcon />}
-          disabled={repositoryId === undefined || gitBranchName === undefined}
+          disabled={repositoryId === undefined || gitBranchName === undefined || workspaceId === undefined}
           onClick={handleLaunch}
         >
           Launch
