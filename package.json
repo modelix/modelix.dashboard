@@ -36,7 +36,7 @@
     "@vitejs/plugin-react": "^4.4.1",
     "axios": "^1.9.0",
     "formik": "^2.4.6",
-    "framer-motion": "^12.10.4",
+    "framer-motion": "^12.17.0",
     "keycloak-js": "^26.2.0",
     "lodash-es": "^4.17.21",
     "oidc-client-ts": "^3.2.1",
