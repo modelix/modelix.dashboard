@@ -477,6 +477,11 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
           {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
         </IconButton>
       </Stack>
+      {
+        expanded && <Typography sx={{ gridColumnStart: 1 }}>
+          {instance.statusText ?? "No Status"}
+        </Typography>
+      }
     </Fragment>
   );
 }
