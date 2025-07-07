@@ -10,7 +10,9 @@ const repositories: NavGroupData = {
       id: 'repositories',
       title: 'Repositories',
       type: 'item',
-      route: '/repositories/default',
+//      route: '/repositories/default',
+      url: `https://${window.location.hostname}/model/repos/`,
+      target: true,
       icon: ClusterOutlined,
       breadcrumbs: false
     }

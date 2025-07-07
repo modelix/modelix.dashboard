@@ -10,7 +10,7 @@ import {Path} from "react-router";
 
 export default function LogoSection({ isIcon, sx, to }: { isIcon: boolean; sx: SxProps<Theme>; to?: string | Partial<Path> }) {
   return (
-    <ButtonBase disableRipple component={Link} to={to || import.meta.env.BASE_URL} sx={sx}>
+    <ButtonBase disableRipple component={Link} to={to || "/"} sx={sx}>
       {isIcon ? <LogoIcon /> : <Logo />}
     </ButtonBase>
   );

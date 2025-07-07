@@ -14,13 +14,13 @@ const connectivity: NavGroupData = {
   title: "Connectivity",
   type: "group",
   children: [
-    {
-      id: "maven",
-      title: "Maven",
-      type: "item",
-      route: "/connectivity/maven",
-      icon: CloudServerOutlined,
-    },
+    // {
+    //   id: "maven",
+    //   title: "Maven",
+    //   type: "item",
+    //   route: "/connectivity/maven",
+    //   icon: CloudServerOutlined,
+    // },
     {
       id: "git",
       title: "Git",
@@ -28,13 +28,13 @@ const connectivity: NavGroupData = {
       route: "/connectivity/git",
       icon: BranchesOutlined,
     },
-    {
-      id: "uploads",
-      title: "Uploads",
-      type: "item",
-      route: "/connectivity/uploads",
-      icon: HddOutlined,
-    },
+    // {
+    //   id: "uploads",
+    //   title: "Uploads",
+    //   type: "item",
+    //   route: "/connectivity/uploads",
+    //   icon: HddOutlined,
+    // },
   ],
 };
 

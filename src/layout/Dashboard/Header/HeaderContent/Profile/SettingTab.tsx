@@ -31,7 +31,7 @@ export default function SettingTab() {
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <Link underline="none" sx={{ color: 'inherit' }} target="_blank" href="">
+{/*      <Link underline="none" sx={{ color: 'inherit' }} target="_blank" href="">
         <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0)}>
           <ListItemIcon>
             <QuestionCircleOutlined />
@@ -64,7 +64,7 @@ export default function SettingTab() {
           <UnorderedListOutlined />
         </ListItemIcon>
         <ListItemText primary="History" />
-      </ListItemButton>
+      </ListItemButton>*/}
     </List>
   );
 }
