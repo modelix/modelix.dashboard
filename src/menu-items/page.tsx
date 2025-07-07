@@ -10,7 +10,7 @@ const pages: NavGroupData = {
       id: 'user-management',
       title: 'Users',
       type: 'item',
-      url: 'https://modelix-dev.q60.de/admin/',
+      url: `https://${window.location.hostname}/admin/`,
       icon: UserOutlined,
       target: true
     }

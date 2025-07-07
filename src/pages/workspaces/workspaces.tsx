@@ -478,9 +478,12 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
         </IconButton>
       </Stack>
       {
-        expanded && <Typography sx={{ gridColumnStart: 1 }}>
-          {instance.statusText ?? "No Status"}
-        </Typography>
+        expanded && <Stack direction="column">
+            <Typography sx={{ gridColumnStart: 1 }}>
+              {instance.statusText ?? "No Status"}
+            </Typography>
+            <Typography>Owner: {instance.owner}</Typography>
+        </Stack>
       }
     </Fragment>
   );
