@@ -67,7 +67,7 @@ importers:
         version: 4.17.12
       '@vitejs/plugin-react':
         specifier: ^4.6.0
-        version: 4.6.0(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2))
+        version: 4.6.0(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2))
       axios:
         specifier: ^1.10.0
         version: 1.10.0
@@ -108,11 +108,11 @@ importers:
         specifier: ^9.2.0
         version: 9.2.0(@types/react@19.1.8)(react@19.1.0)(redux@5.0.1)
       react-router:
-        specifier: ^7.6.3
-        version: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^7.7.0
+        version: 7.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react-router-dom:
         specifier: ^7.6.3
-        version: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        version: 7.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       simplebar-react:
         specifier: ^3.3.2
         version: 3.3.2(react@19.1.0)
@@ -121,13 +121,13 @@ importers:
         version: 2.3.4(react@19.1.0)
       vite:
         specifier: ^7.0.3
-        version: 7.0.4(@types/node@22.16.4)(jiti@2.4.2)
+        version: 7.0.5(@types/node@22.16.4)(jiti@2.4.2)
       vite-jsconfig-paths:
         specifier: ^2.0.1
-        version: 2.0.1(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2))
+        version: 2.0.1(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2))
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.8.3)(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2))
+        version: 5.1.4(typescript@5.8.3)(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2))
       web-vitals:
         specifier: ^5.0.3
         version: 5.0.3
@@ -170,7 +170,7 @@ importers:
         version: 19.1.6(@types/react@19.1.8)
       '@vitejs/plugin-react-swc':
         specifier: ^3.10.2
-        version: 3.10.2(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2))
+        version: 3.10.2(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2))
       esbuild-runner:
         specifier: ^2.2.2
         version: 2.2.2(esbuild@0.25.6)
@@ -3679,15 +3679,15 @@ packages:
     resolution: {integrity: sha512-z6F7K9bV85EfseRCp2bzrpyQ0Gkw1uLoCel9XBVWPg/TjRj94SkJzUTGfOa4bs7iJvBWtQG0Wq7wnI0syw3EBQ==}
     engines: {node: '>=0.10.0'}
 
-  react-router-dom@7.6.3:
-    resolution: {integrity: sha512-DiWJm9qdUAmiJrVWaeJdu4TKu13+iB/8IEi0EW/XgaHCjW/vWGrwzup0GVvaMteuZjKnh5bEvJP/K0MDnzawHw==}
+  react-router-dom@7.7.0:
+    resolution: {integrity: sha512-wwGS19VkNBkneVh9/YD0pK3IsjWxQUVMDD6drlG7eJpo1rXBtctBqDyBm/k+oKHRAm1x9XWT3JFC82QI9YOXXA==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  react-router@7.6.3:
-    resolution: {integrity: sha512-zf45LZp5skDC6I3jDLXQUu0u26jtuP4lEGbc7BbdyxenBN1vJSTA18czM2D+h5qyMBuMrD+9uB+mU37HIoKGRA==}
+  react-router@7.7.0:
+    resolution: {integrity: sha512-3FUYSwlvB/5wRJVTL/aavqHmfUKe0+Xm9MllkYgGo9eDwNdkvwlJGjpPxono1kCycLt6AnDTgjmXvK3/B4QGuw==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -4336,8 +4336,8 @@ packages:
       vite:
         optional: true
 
-  vite@7.0.4:
-    resolution: {integrity: sha512-SkaSguuS7nnmV7mfJ8l81JGBFV7Gvzp8IzgE8A8t23+AxuNX61Q5H1Tpz5efduSN7NHC8nQXD3sKQKZAu5mNEA==}
+  vite@7.0.5:
+    resolution: {integrity: sha512-1mncVwJxy2C9ThLwz0+2GKZyEXuC3MyWtAAlNftlZZXZDP3AJt5FmwcMit/IGGaNZ8ZOB2BNO/HFUB+CpN0NQw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -5938,15 +5938,15 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-react-swc@3.10.2(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2))':
+  '@vitejs/plugin-react-swc@3.10.2(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-beta.11
       '@swc/core': 1.12.9
-      vite: 7.0.4(@types/node@22.16.4)(jiti@2.4.2)
+      vite: 7.0.5(@types/node@22.16.4)(jiti@2.4.2)
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@vitejs/plugin-react@4.6.0(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2))':
+  '@vitejs/plugin-react@4.6.0(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2))':
     dependencies:
       '@babel/core': 7.28.0
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.0)
@@ -5954,7 +5954,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.19
       '@types/babel__core': 7.20.5
       react-refresh: 0.17.0
-      vite: 7.0.4(@types/node@22.16.4)(jiti@2.4.2)
+      vite: 7.0.5(@types/node@22.16.4)(jiti@2.4.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -8134,13 +8134,13 @@ snapshots:
 
   react-refresh@0.17.0: {}
 
-  react-router-dom@7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  react-router-dom@7.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
-      react-router: 7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-router: 7.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
 
-  react-router@7.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  react-router@7.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       cookie: 1.0.2
       react: 19.1.0
@@ -8881,28 +8881,28 @@ snapshots:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  vite-jsconfig-paths@2.0.1(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2)):
+  vite-jsconfig-paths@2.0.1(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2)):
     dependencies:
       debug: 4.4.1
       globrex: 0.1.2
       recrawl-sync: 2.2.3
       tsconfig-paths: 3.15.0
-      vite: 7.0.4(@types/node@22.16.4)(jiti@2.4.2)
+      vite: 7.0.5(@types/node@22.16.4)(jiti@2.4.2)
     transitivePeerDependencies:
       - supports-color
 
-  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2)):
+  vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2)):
     dependencies:
       debug: 4.4.1
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.8.3)
     optionalDependencies:
-      vite: 7.0.4(@types/node@22.16.4)(jiti@2.4.2)
+      vite: 7.0.5(@types/node@22.16.4)(jiti@2.4.2)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@7.0.4(@types/node@22.16.4)(jiti@2.4.2):
+  vite@7.0.5(@types/node@22.16.4)(jiti@2.4.2):
     dependencies:
       esbuild: 0.25.6
       fdir: 6.4.6(picomatch@4.0.2)
