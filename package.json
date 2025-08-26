@@ -70,7 +70,7 @@
     "@types/node": "^22.18.0",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.8",
-    "@vitejs/plugin-react-swc": "^3.11.0",
+    "@vitejs/plugin-react-swc": "^4.0.1",
     "esbuild-runner": "^2.2.2",
     "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
