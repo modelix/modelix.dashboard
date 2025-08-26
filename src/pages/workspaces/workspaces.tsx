@@ -451,7 +451,7 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
           <IconButton
             disabled={!ready}
             sx={{ opacity: ready ? "100%" : "50%" }}
-            href={`http://localhost/workspace-instances/${instance.id}/port/5800/`}
+            href={`${window.location.protocol}//${window.location.host}/workspace-instances/${instance.id}/port/5800/`}
             target="_blank"
           >
             <img alt="MPS" src={mpsIcon} width="16px" height="16px" />
