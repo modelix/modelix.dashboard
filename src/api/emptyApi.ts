@@ -5,7 +5,7 @@ import {selectAccessToken} from "../features/auth/authSlice.ts";
 // initialize an empty api service that we'll inject endpoints into later as needed
 export const emptySplitApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost',
+    baseUrl: `${window.location.protocol}//${window.location.host}`,
     prepareHeaders: (headers, { getState }: any) => {
       // Get the token from the Redux store
       const token = selectAccessToken(getState()); // Use the selector
