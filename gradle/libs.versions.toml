@@ -3,5 +3,5 @@
 [libraries]
 
 [plugins]
-gitVersion = { id = "com.palantir.git-version", version = "4.0.0" }
+gitVersion = { id = "com.palantir.git-version", version = "4.1.0" }
 node = {id = "com.github.node-gradle.node", version = "7.1.0"}
