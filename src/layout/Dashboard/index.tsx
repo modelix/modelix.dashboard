@@ -10,7 +10,6 @@ import Drawer from './Drawer/index.js';
 import Header from './Header/index.js';
 import Footer from './Footer.js';
 import Loader from '../../components/Loader';
-import Breadcrumbs from '../../components/@extended/Breadcrumbs';
 
 import { handlerDrawerOpen, useGetMenuMaster } from '../../api/menu';
 
