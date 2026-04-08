@@ -24,7 +24,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ListEditor from "../../../components/ListEditor.tsx";
 import EditIcon from "@mui/icons-material/Edit";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockOutlineIcon from "@mui/icons-material/LockOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 import {BranchesTable} from "./BranchesTable.tsx";
 import {DraftsTable} from "./DraftsTable.tsx";
@@ -222,7 +222,7 @@ export function RepositoryComponent({repo}: { repo: GitRepositoryConfig | null }
                                             element.hasCredentials ? (
                                                 <EditIcon/>
                                             ) : (
-                                                <LockOutlinedIcon/>
+                                                <LockOutlineIcon/>
                                             )
                                           }
                                           sx={{gridColumnStart: 1, gridColumnEnd: 5}}
