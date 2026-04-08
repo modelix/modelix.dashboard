@@ -256,8 +256,6 @@ function WorkspaceCard({
                   "2023.2",
                   "2022.3",
                   "2021.3",
-                  "2021.2",
-                  "2021.1",
                 ].map((v) => (
                   <MenuItem key={v} value={v}>
                     {v}
