@@ -34,7 +34,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import Divider from "@mui/material/Divider";
 import ErrorIcon from "@mui/icons-material/Error";
 import Tooltip from "@mui/material/Tooltip";
-import PlayCircleOutlinedIcon from "@mui/icons-material/PlayCircleOutlined";
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import StopCircleOutlinedIcon from "@mui/icons-material/StopCircleOutlined";
 import { useAuth } from "react-oidc-context";
 import Stack from "@mui/material/Stack";
@@ -545,7 +545,7 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
       <Typography sx={{ gridColumnStart: 1 }}>
         {instance.name ?? instance.id}
       </Typography>
-      <Typography color="textSecondary" sx={{fontSize: 1.15}}>
+      <Typography color="textSecondary" fontSize="small">
         {instance.state}
       </Typography>
       <Stack direction="row" spacing={0}>
@@ -553,7 +553,7 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
           <IconButton
             disabled={!ready}
             sx={{ opacity: ready ? "100%" : "50%" }}
-            href={`http://localhost/workspace-instances/${instance.id}/port/5800/`}
+            href={`${window.location.protocol}//${window.location.host}/workspace-instances/${instance.id}/port/5800/`}
             target="_blank"
           >
             <img alt="MPS" src={mpsIcon} width="16px" height="16px" />
@@ -566,7 +566,7 @@ function InstanceComponent({ instance }: { instance: WorkspaceInstance }) {
           {instance.enabled ? (
             <StopCircleOutlinedIcon />
           ) : (
-            <PlayCircleOutlinedIcon />
+            <PlayCircleOutlineIcon />
           )}
         </IconButton>
         <IconButton
