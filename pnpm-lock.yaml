@@ -36,8 +36,8 @@ importers:
         specifier: ^5.2.10
         version: 5.2.10
       '@modelix/openapi-specifications':
-        specifier: 1.4.0
-        version: 1.4.0
+        specifier: 1.6.0
+        version: 1.6.0
       '@mui/base':
         specifier: 7.0.0-beta.4
         version: 7.0.0-beta.4(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -821,8 +821,8 @@ packages:
   '@messageformat/runtime@3.0.2':
     resolution: {integrity: sha512-dkIPDCjXcfhSHgNE1/qV6TeczQZR59Yx0xXeafVKgK3QVWoxc38ljwpksUpnzCGvN151KUbCJTDZVmahtf1YZw==}
 
-  '@modelix/openapi-specifications@1.4.0':
-    resolution: {integrity: sha512-STADXEXMU6lMN3raDvMVwQaGRZKKVtVPssP6PMCepr/VCjDqwB8uBBp2X6h/Vs71Rw/3U3pYpAfcPwBOvyWGwA==}
+  '@modelix/openapi-specifications@1.6.0':
+    resolution: {integrity: sha512-UMVaTWrmsTL9mvBY+G/kQkS4ou8BZd19aYKbZIR4rxhDs8IsYMb1++weQ69KyPK2hxXLxDlAc8+ooYmPU98ESw==}
 
   '@mui/base@7.0.0-beta.4':
     resolution: {integrity: sha512-WzFMFK9dy66fy941u/N0cmA1Yz4LfdNbkBtDK0GBV5ewBvQhSL2Z1+Xcf+lJB0yX6Xg9QvjDDgGcqBqEstyFAg==}
@@ -5491,7 +5491,7 @@ snapshots:
     dependencies:
       make-plural: 7.5.0
 
-  '@modelix/openapi-specifications@1.4.0': {}
+  '@modelix/openapi-specifications@1.6.0': {}
 
   '@mui/base@7.0.0-beta.4(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:

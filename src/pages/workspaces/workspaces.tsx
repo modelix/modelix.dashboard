@@ -44,6 +44,8 @@ import OpenInFullIcon from "@mui/icons-material/OpenInFull";
 import WorkspaceLaunchButton from "../connectivity/git/WorkspaceLaunchButton.tsx";
 import {useListGitRepositoriesQuery} from "../../api/gitConnectorApi.ts";
 import ListEditor from "../../components/ListEditor.tsx";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Button from "@mui/material/Button";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -309,18 +311,121 @@ function WorkspaceCard({
                   gridColumnEnd: "end",
                 }}
               >
-                <EditableList<MavenRepository>
-                  items={dataToShow.mavenRepositories ?? []}
-                  newItemTemplate={{ url: "" }}
-                  onListChange={(newList) =>
-                    setModifiedData({
-                      ...dataToShow,
-                      mavenRepositories: newList,
-                    })
+              <ListEditor<MavenRepository>
+                  initialData={dataToShow.mavenRepositories ?? []}
+                  newItemTemplate={{
+                      url: "",
+                      hasCredentials: false,
+                  }}
+                  onChange={(it) =>
+                      setModifiedData({...dataToShow, mavenRepositories: it})
                   }
-                  updateItem={(item, newValue) => ({ ...item, url: newValue })}
-                  itemText={(item) => item.url}
-                />
+                  itemComponent={(
+                      element,
+                      index,
+                      isNewItem,
+                      deleteItem,
+                      updateItem,
+                  ) => (
+                      <Fragment key={index}>
+                          <TextField
+                              sx={{gridColumnStart: 1, gridColumnEnd: 5}}
+                              label={isNewItem ? "New URL" : "URL"}
+                              value={element.url}
+                              onChange={(e) =>
+                                  updateItem({...element, url: e.target.value})
+                              }
+                          />
+                          {!isNewItem && (
+                              <IconButton onClick={deleteItem}>
+                                  <DeleteIcon/>
+                              </IconButton>
+                          )}
+                          {element.url ||
+                          element.hasCredentials ||
+                          element.credentials ? (
+                              <>
+                                  {element.credentials ? (
+                                      <>
+                                          <TextField
+                                              sx={{gridColumnStart: 1, gridColumnEnd: 3}}
+                                              label="Username"
+                                              value={element.credentials?.username ?? ""}
+                                              onChange={(e) =>
+                                                  updateItem({
+                                                      ...element,
+                                                      hasCredentials: true,
+                                                      credentials: {
+                                                          username: e.target.value,
+                                                          password:
+                                                              element.credentials?.password ?? "",
+                                                      },
+                                                  })
+                                              }
+                                          />
+                                          <TextField
+                                              sx={{gridColumnStart: 3, gridColumnEnd: 5}}
+                                              type="password"
+                                              label="Password / Token"
+                                              value={element.credentials?.password ?? ""}
+                                              onChange={(e) =>
+                                                  updateItem({
+                                                      ...element,
+                                                      hasCredentials: true,
+                                                      credentials: {
+                                                          username:
+                                                              element.credentials?.username ?? "",
+                                                          password: e.target.value,
+                                                      },
+                                                  })
+                                              }
+                                          />
+                                      </>
+                                  ) : (
+                                      <Button
+                                          startIcon={
+                                              element.hasCredentials ? (
+                                                  <EditIcon/>
+                                              ) : (
+                                                  <LockOutlinedIcon/>
+                                              )
+                                          }
+                                          sx={{gridColumnStart: 1, gridColumnEnd: 5}}
+                                          onClick={() =>
+                                              updateItem({
+                                                  ...element,
+                                                  hasCredentials: true,
+                                                  credentials: {
+                                                      username: "",
+                                                      password: "",
+                                                  },
+                                              })
+                                          }
+                                      >
+                                          {element.hasCredentials
+                                              ? "Change Credentials"
+                                              : "Add Credentials"}
+                                      </Button>
+                                  )}
+                                  {(element.hasCredentials || element.credentials) && (
+                                      <IconButton
+                                          sx={{gridColumnStart: 5, gridColumnEnd: 6}}
+                                          onClick={() =>
+                                              updateItem({
+                                                  ...element,
+                                                  hasCredentials: false,
+                                                  credentials: undefined,
+                                              })
+                                          }
+                                      >
+                                          <CancelIcon/>
+                                      </IconButton>
+                                  )}
+                              </>
+                          ) : null}
+                      </Fragment>
+                  )}
+              />
               </Box>
               <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                 Maven Artifacts
