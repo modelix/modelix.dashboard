@@ -35,7 +35,7 @@
     "@tanstack/react-query": "^5.96.2",
     "@types/lodash-es": "^4.17.12",
     "@vitejs/plugin-react": "^4.7.0",
-    "axios": "^1.14.0",
+    "axios": "^1.15.0",
     "formik": "^2.4.9",
     "framer-motion": "^12.38.0",
     "keycloak-js": "^26.2.3",
