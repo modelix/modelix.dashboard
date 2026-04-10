@@ -82,7 +82,7 @@
     "globals": "^17.4.0",
     "immutable": "^5.1.5",
     "knip": "^5.88.1",
-    "prettier": "^3.8.1",
+    "prettier": "^3.8.2",
     "prettier-eslint-cli": "^8.0.1",
     "semantic-release": "24.2.7",
     "ts-node": "^10.9.2",
