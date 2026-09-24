@@ -9,6 +9,7 @@ import {
   useListInstancesQuery,
   useListWorkspacesQuery,
   useUpdateWorkspaceMutation,
+  WorkspaceBuildMode,
   WorkspaceConfig,
   WorkspaceInstance,
 } from "../../api/workspacesApi.ts";
@@ -46,6 +47,7 @@ import {useListGitRepositoriesQuery} from "../../api/gitConnectorApi.ts";
 import ListEditor from "../../components/ListEditor.tsx";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Button from "@mui/material/Button";
+import WorkspaceArtifacts from "./WorkspaceArtifacts.tsx";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -208,6 +210,14 @@ function WorkspaceCard({
               MPS Version
             </Typography>
             <Typography>{workspace.mpsVersion}</Typography>
+            <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
+              Build
+            </Typography>
+            <Typography>
+              {workspace.buildMode === "EXTERNAL"
+                ? "External (CI pipeline)"
+                : "Inside the cluster"}
+            </Typography>
             {workspace.gitRepositoryIds?.map((repoId) => (
               <Fragment key={repoId}>
                 <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
@@ -261,6 +271,21 @@ function WorkspaceCard({
                     {v}
                   </MenuItem>
                 ))}
+              </Select>
+              <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
+                Build
+              </Typography>
+              <Select
+                value={dataToShow.buildMode ?? "IN_CLUSTER"}
+                onChange={(e) =>
+                  setModifiedData({
+                    ...dataToShow,
+                    buildMode: e.target.value as WorkspaceBuildMode,
+                  })
+                }
+              >
+                <MenuItem value="IN_CLUSTER">Inside the cluster</MenuItem>
+                <MenuItem value="EXTERNAL">External (CI pipeline)</MenuItem>
               </Select>
               <Typography color="textSecondary" sx={{ gridColumnStart: 1 }}>
                 Memory Limit
@@ -470,6 +495,12 @@ function WorkspaceCard({
             </Box>
           </CardContent>
         </Collapse>
+        {workspace.buildMode === "EXTERNAL" && (
+          <>
+            <Divider />
+            <WorkspaceArtifacts workspaceId={workspace.id} />
+          </>
+        )}
         <Divider />
         <CardHeader
           title="Instances"
