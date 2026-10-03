@@ -48,6 +48,9 @@ import ListEditor from "../../components/ListEditor.tsx";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Button from "@mui/material/Button";
 import WorkspaceArtifacts from "./WorkspaceArtifacts.tsx";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import CreateWorkspaceButton from "./CreateWorkspaceButton.tsx";
+import { MPS_VERSIONS } from "./mpsVersions.ts";
 
 export default function WorkspacesList() {
   const workspaceListQuery = useListWorkspacesQuery(undefined, {
@@ -62,8 +65,18 @@ export default function WorkspacesList() {
     );
   }
 
+  const workspaces = workspaceListQuery.data?.workspaces ?? [];
   return (
-    <WorkspacesTable workspaces={workspaceListQuery.data?.workspaces ?? []} />
+    <Stack spacing={2}>
+      <Stack direction="row" justifyContent="flex-end">
+        <CreateWorkspaceButton />
+      </Stack>
+      {workspaces.length === 0 ? (
+        <Typography color="textSecondary">No workspaces yet.</Typography>
+      ) : (
+        <WorkspacesTable workspaces={workspaces} />
+      )}
+    </Stack>
   );
 }
 
@@ -260,13 +273,7 @@ function WorkspaceCard({
                   })
                 }
               >
-                {[
-                  "2024.1",
-                  "2023.3",
-                  "2023.2",
-                  "2022.3",
-                  "2021.3",
-                ].map((v) => (
+                {MPS_VERSIONS.map((v) => (
                   <MenuItem key={v} value={v}>
                     {v}
                   </MenuItem>
@@ -507,7 +514,21 @@ function WorkspaceCard({
           slotProps={{ title: { variant: "h6" } }}
           action={
             <>
-              <WorkspaceLaunchButton initialWorkspaceId={workspace.id} initialGitRepositoryId={workspace.gitRepositoryIds?.at(0)} />
+              {(workspace.gitRepositoryIds ?? []).length === 0 ? (
+                // Without a git repository there is no draft to choose
+                <Tooltip title="Launch Workspace">
+                  <span>
+                    <IconButton
+                      disabled={newInstanceResult.isLoading}
+                      onClick={launchInstance}
+                    >
+                      <RocketLaunchIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              ) : (
+                <WorkspaceLaunchButton initialWorkspaceId={workspace.id} initialGitRepositoryId={workspace.gitRepositoryIds?.at(0)} />
+              )}
             </>
           }
         />

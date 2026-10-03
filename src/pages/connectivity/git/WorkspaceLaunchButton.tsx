@@ -198,9 +198,10 @@ function WorkspaceLaunchDialogContent(props: {
   );
 }
 
-function RepositoryChooser(props: {
+export function RepositoryChooser(props: {
   repositoryId?: string;
   onChange: (newId?: string) => void;
+  placeholder?: string;
 }) {
   const repositoryListQuery = useListGitRepositoriesQuery({});
   const selectedRepository = repositoryListQuery.data?.repositories?.find(
@@ -216,7 +217,11 @@ function RepositoryChooser(props: {
       options={sortedOptions}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       renderInput={(params) => (
-        <TextField {...params} value={selectedRepository?.name ?? ""} />
+        <TextField
+          {...params}
+          value={selectedRepository?.name ?? ""}
+          placeholder={props.placeholder}
+        />
       )}
       getOptionLabel={(option) => option.name ?? option.id}
     />
